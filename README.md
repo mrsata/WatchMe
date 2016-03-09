@@ -9,6 +9,7 @@ Description: Provides a way to quickly access the movie and tv details you love
 
 Optional User Stories:
 - [ ] User can connect the app with Google Calendar and put the date for the next tv episode/movie on it.
+- [ ] Be able to swipe in from the left and choose between different windows
 
 APIs:
 
