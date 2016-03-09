@@ -11,6 +11,7 @@ Optional User Stories:
 - [ ] User can connect the app with Google Calendar and put the date for the next tv episode/movie on it.
 
 APIs:
+
 1. TV: http://www.programmableweb.com/api/trakt.tv
 2. TV: http://www.programmableweb.com/api/tv-media-tv-listings
 3. Google calendar: https://developers.google.com/google-apps/calendar/
