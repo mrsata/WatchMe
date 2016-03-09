@@ -16,8 +16,18 @@ Optional User Stories:
 #### Wireframes:
 <img src = 'http://i.imgur.com/U9l5nGt.jpg' title='Wireframes' width='300' alt='Wireframes' />
 
-#### APIs:
+#### APIs and Endpoints:
 
 1. TV: http://docs.trakt.apiary.io/#
+   - OAuth
+   - Comments: Comment and like 
+   - Recommendations: Get movie and tv recommendations 
+   - Search: Text Query
+   - Shows: Collection Progress
+   - Add to Collection 
+   - User
+
+(Optional APIs - Use if necessary) 
+
 2. TV: http://www.programmableweb.com/api/tv-media-tv-listings
 3. Google calendar: https://developers.google.com/google-apps/calendar/
