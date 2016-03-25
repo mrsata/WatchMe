@@ -11,13 +11,13 @@
 		68B680C21CA21318000DC9EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68B680C01CA21318000DC9EF /* Main.storyboard */; };
 		68B680C41CA21318000DC9EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B680C31CA21318000DC9EF /* Assets.xcassets */; };
 		68B680C71CA21318000DC9EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68B680C51CA21318000DC9EF /* LaunchScreen.storyboard */; };
-		68B680D31CA21DA4000DC9EF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680D21CA21DA4000DC9EF /* LoginViewController.swift */; };
-		68B680D51CA21DF5000DC9EF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680D41CA21DF5000DC9EF /* SearchViewController.swift */; };
+		68B680D51CA21DF5000DC9EF /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680D41CA21DF5000DC9EF /* DiscoverViewController.swift */; };
 		68B680D71CA21E06000DC9EF /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680D61CA21E06000DC9EF /* SearchDetailViewController.swift */; };
 		68B680D91CA21E2C000DC9EF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680D81CA21E2C000DC9EF /* CollectionViewController.swift */; };
 		68B680DB1CA21E37000DC9EF /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */; };
-		68B680DD1CA21E41000DC9EF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680DC1CA21E41000DC9EF /* ProfileViewController.swift */; };
+		68B680DD1CA21E41000DC9EF /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680DC1CA21E41000DC9EF /* MeViewController.swift */; };
 		68B680DF1CA21EB8000DC9EF /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680DE1CA21EB8000DC9EF /* Client.swift */; };
+		9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */; };
 		ECE438D3DCD25481BED040A7 /* Pods_WatchMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51530C3D118BCCA3317095C1 /* Pods_WatchMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,14 +30,14 @@
 		68B680C31CA21318000DC9EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68B680C61CA21318000DC9EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68B680C81CA21318000DC9EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		68B680D21CA21DA4000DC9EF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		68B680D41CA21DF5000DC9EF /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		68B680D41CA21DF5000DC9EF /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		68B680D61CA21E06000DC9EF /* SearchDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		68B680D81CA21E2C000DC9EF /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
-		68B680DC1CA21E41000DC9EF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		68B680DC1CA21E41000DC9EF /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		68B680DE1CA21EB8000DC9EF /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.release.xcconfig"; sourceTree = "<group>"; };
+		9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +104,12 @@
 		68B680D01CA21D46000DC9EF /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				68B680D21CA21DA4000DC9EF /* LoginViewController.swift */,
-				68B680D41CA21DF5000DC9EF /* SearchViewController.swift */,
-				68B680D61CA21E06000DC9EF /* SearchDetailViewController.swift */,
+				9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */,
 				68B680D81CA21E2C000DC9EF /* CollectionViewController.swift */,
+				68B680D41CA21DF5000DC9EF /* DiscoverViewController.swift */,
+				68B680DC1CA21E41000DC9EF /* MeViewController.swift */,
+				68B680D61CA21E06000DC9EF /* SearchDetailViewController.swift */,
 				68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */,
-				68B680DC1CA21E41000DC9EF /* ProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -173,6 +173,7 @@
 				TargetAttributes = {
 					68B680B81CA21318000DC9EF = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 477CNH7T4Q;
 					};
 				};
 			};
@@ -260,14 +261,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68B680D51CA21DF5000DC9EF /* SearchViewController.swift in Sources */,
-				68B680D31CA21DA4000DC9EF /* LoginViewController.swift in Sources */,
+				68B680D51CA21DF5000DC9EF /* DiscoverViewController.swift in Sources */,
 				68B680DB1CA21E37000DC9EF /* ItemDetailViewController.swift in Sources */,
 				68B680D71CA21E06000DC9EF /* SearchDetailViewController.swift in Sources */,
-				68B680DD1CA21E41000DC9EF /* ProfileViewController.swift in Sources */,
+				68B680DD1CA21E41000DC9EF /* MeViewController.swift in Sources */,
 				68B680BD1CA21318000DC9EF /* AppDelegate.swift in Sources */,
 				68B680DF1CA21EB8000DC9EF /* Client.swift in Sources */,
 				68B680D91CA21E2C000DC9EF /* CollectionViewController.swift in Sources */,
+				9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,10 +380,13 @@
 			baseConfigurationReference = 2E080AB9FA8E104688C9AAC3 /* Pods-WatchMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WatchMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Grace.WatchMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -391,10 +395,13 @@
 			baseConfigurationReference = 76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WatchMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Grace.WatchMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

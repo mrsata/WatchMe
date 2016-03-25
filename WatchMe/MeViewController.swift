@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  MeViewController.swift
 //  WatchMe
 //
 //  Created by Labuser on 3/22/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class MeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
