@@ -1,15 +1,14 @@
 //
-//  LoginViewController.swift
+//  MainViewController.swift
 //  WatchMe
 //
-//  Created by Labuser on 3/22/16.
+//  Created by LH on 3/24/16.
 //  Copyright © 2016 Grace. All rights reserved.
 //
 
 import UIKit
-import BDBOAuth1Manager
 
-class LoginViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

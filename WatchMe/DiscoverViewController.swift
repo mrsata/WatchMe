@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  DiscoverViewController.swift
 //  WatchMe
 //
 //  Created by Labuser on 3/22/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class DiscoverViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
