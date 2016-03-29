@@ -26,6 +26,7 @@ Optional User Stories:
    - Shows: Collection Progress
    - Add to Collection 
    - User
+   - Something useful: https://github.com/arsonik/AKTrakt 
 
 (Optional APIs - Use if necessary) 
 
