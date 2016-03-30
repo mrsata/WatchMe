@@ -85,13 +85,9 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WatchMe/AFNetworking.framework"
-  install_framework "Pods-WatchMe/AKTrakt.framework"
-  install_framework "Pods-WatchMe/Alamofire.framework"
   install_framework "Pods-WatchMe/BDBOAuth1Manager.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatchMe/AFNetworking.framework"
-  install_framework "Pods-WatchMe/AKTrakt.framework"
-  install_framework "Pods-WatchMe/Alamofire.framework"
   install_framework "Pods-WatchMe/BDBOAuth1Manager.framework"
 fi
