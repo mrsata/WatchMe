@@ -39,7 +39,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qXO-nK-6oZ"/>
+                    <navigationItem key="navigationItem" title="Collections" id="qXO-nK-6oZ">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="p4p-uZ-BwC">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4xI-Sx-PZS">
+                                <rect key="frame" x="233" y="7" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <segue destination="9FB-Dh-dht" kind="push" id="n3F-ny-IZ9"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Hs-TH-oct" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -72,18 +83,11 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JRa-hh-j7E">
-                                <rect key="frame" x="0.0" y="20" width="321" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IvE-jh-ge2" firstAttribute="leading" secondItem="NHL-1c-Mzh" secondAttribute="leadingMargin" constant="-20" id="4UU-QD-uax"/>
-                            <constraint firstItem="IvE-jh-ge2" firstAttribute="top" secondItem="JRa-hh-j7E" secondAttribute="bottom" constant="20" id="5vS-Z5-ecG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="JRa-hh-j7E" secondAttribute="trailing" constant="-20" id="KI7-l2-Stp"/>
-                            <constraint firstItem="JRa-hh-j7E" firstAttribute="top" secondItem="eMr-5F-d6B" secondAttribute="bottom" id="PkX-pN-fed"/>
-                            <constraint firstItem="JRa-hh-j7E" firstAttribute="leading" secondItem="NHL-1c-Mzh" secondAttribute="leadingMargin" constant="-21" id="fTX-Oh-8gk"/>
+                            <constraint firstItem="IvE-jh-ge2" firstAttribute="top" secondItem="eMr-5F-d6B" secondAttribute="bottom" id="m3h-db-660"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IvE-jh-ge2" secondAttribute="trailing" constant="-20" id="umL-7u-r66"/>
                             <constraint firstAttribute="bottomMargin" secondItem="IvE-jh-ge2" secondAttribute="bottom" id="wBl-sW-V8X"/>
                         </constraints>
@@ -108,7 +112,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="wrK-4J-IoB"/>
+                    <navigationItem key="navigationItem" title="Me" id="wrK-4J-IoB">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Tjp-Gh-3Ph">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yE8-iB-iqq">
+                                <rect key="frame" x="233" y="7" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <segue destination="9FB-Dh-dht" kind="push" id="j2a-pZ-bOz"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CbU-Wd-geG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -253,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyA-Kt-APF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="2581"/>
+            <point key="canvasLocation" x="132" y="2623"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Tx7-ge-0rS">
@@ -300,10 +315,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="LaL-gC-p68"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgN-IC-j8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="586" y="2581"/>
+            <point key="canvasLocation" x="586" y="2623"/>
         </scene>
         <!--Main-->
         <scene sceneID="xZp-tV-p0w">
@@ -382,4 +398,7 @@
             <point key="canvasLocation" x="1050" y="1129"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="j2a-pZ-bOz"/>
+    </inferredMetricsTieBreakers>
 </document>
