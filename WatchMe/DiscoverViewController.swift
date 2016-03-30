@@ -8,12 +8,22 @@
 
 import UIKit
 
-class DiscoverViewController: UIViewController {
+class DiscoverViewController: UIViewController, UISearchBarDelegate {
 
+    var searchBar:UISearchBar = UISearchBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // Initialize searchBar:
+        searchBar.delegate = self
+        searchBar.placeholder = "Search your favorites"
+        searchBar.sizeToFit()
+        self.navigationItem.titleView = searchBar
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +31,16 @@ class DiscoverViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Functions for searchBar:
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = false
+        self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
+    }
 
     /*
     // MARK: - Navigation
