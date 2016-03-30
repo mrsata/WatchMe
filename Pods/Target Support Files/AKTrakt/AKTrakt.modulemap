@@ -1,0 +1,6 @@
+framework module AKTrakt {
+  umbrella header "AKTrakt-umbrella.h"
+
+  export *
+  module * { export * }
+}
