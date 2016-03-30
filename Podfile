@@ -6,6 +6,5 @@
 target 'WatchMe' do
     pod 'BDBOAuth1Manager'
     pod 'AFNetworking'
-    pod 'AKTrakt'
 end
 

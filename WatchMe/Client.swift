@@ -33,35 +33,18 @@ class Client: BDBOAuth1SessionManager {
         
         // Fetch request token and redirect to authorization page
         
-        //Client.sharedInstance.requestSerializer.removeAccessToken()
-        //Client.sharedInstance.fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string:"trakt://oauth"), scope: nil, success: {( requestToken: BDBOAuth1Credential!) -> Void in
-            //print("Got the request token")
-            //let authURL = NSURL(string: "http://docs.trakt.apiary.io/#reference/authentication-oauth/authorize\(requestToken.token)")
+        Client.sharedInstance.requestSerializer.removeAccessToken()
+        Client.sharedInstance.fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string:"trakt://oauth"), scope: nil, success: {( requestToken: BDBOAuth1Credential!) -> Void in
+            print("Got the request token")
+            let authURL = NSURL(string: "http://docs.trakt.apiary.io/#reference/authentication-oauth/authorize\(requestToken.token)")
             
-            // Paste from the website
-            let url = NSURL(string: "https://api-v2launch.trakt.tv/oauth/authorize?response_type=code&client_id=\(clientKey)&redirect_uri=trakt://oauth")!
-            let request = NSMutableURLRequest(URL: url)
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             
-            let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithRequest(request) { data, response, error in
-                if let response = response, data = data {
-                    print(response)
-                    print(String(data: data, encoding: NSUTF8StringEncoding))
-                } else {
-                    print(error)
-                }
-            }
-            
-            task.resume()
-            
-            /*UIApplication.sharedApplication().openURL(authURL!)
+            UIApplication.sharedApplication().openURL(authURL!)
             }) {(error: NSError!) -> Void in
                 print("Gailed to get request token")
                 self.loginCompletion?(user: nil, error: error)
         }
-*/
-    //})
     }
-
+    
+    
 }
