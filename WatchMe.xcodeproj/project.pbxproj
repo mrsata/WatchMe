@@ -19,6 +19,7 @@
 		68B680DD1CA21E41000DC9EF /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680DC1CA21E41000DC9EF /* MeViewController.swift */; };
 		68B680DF1CA21EB8000DC9EF /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680DE1CA21EB8000DC9EF /* Client.swift */; };
 		9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */; };
+		9BE5721B1CAB5BD20025A19E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */; };
 		ECE438D3DCD25481BED040A7 /* Pods_WatchMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51530C3D118BCCA3317095C1 /* Pods_WatchMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		68B680DE1CA21EB8000DC9EF /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.release.xcconfig"; sourceTree = "<group>"; };
 		9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				68B680DC1CA21E41000DC9EF /* MeViewController.swift */,
 				68B680D61CA21E06000DC9EF /* SearchDetailViewController.swift */,
 				68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */,
+				9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				6886EC2C1CA4E07A0040DE8F /* User.swift in Sources */,
 				68B680DF1CA21EB8000DC9EF /* Client.swift in Sources */,
 				68B680D91CA21E2C000DC9EF /* CollectionViewController.swift in Sources */,
+				9BE5721B1CAB5BD20025A19E /* LoginViewController.swift in Sources */,
 				9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
