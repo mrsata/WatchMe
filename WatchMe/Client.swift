@@ -27,29 +27,23 @@ class Client: AFOAuth2Manager {
     var loginSuccess: (() -> ())?
     var loginFailure: ((NSError) -> ())?
     
-    func login(success: () -> (), failure: (NSError) -> ())
+    func login(pin: String, success: () -> (), failure: (NSError) -> ())
     {
         loginSuccess = success
         loginFailure = failure
-        Client.sharedInstance.authenticateUsingOAuthWithURLString("https://trakt.tv/oauth/authorize", code: "code", redirectURI: "urn:ietf:wg:oauth:2.0:oob", success: { (requestToken: AFOAuthCredential!)
-            -> Void in
-            print("Got the request token")
+       
+        var parameters: [String: String] = ["code": pin]
+        parameters["client_id"] =  clientKey
+        parameters["client_secret"] = clientSecret
+        parameters["redirect_uri"] = "urn:ietf:wg:oauth:2.0:oob"
+        parameters["grant_type"] = "authorization_code"
+        Client.sharedInstance.authenticateUsingOAuthWithURLString("https://api-v2launch.trakt.tv/oauth/token", parameters: parameters, success: { (accessToken: AFOAuthCredential!) -> Void in
+            print("Was successful")
+            print(accessToken)
             }) { (error: NSError!) -> Void in
-                print("Failed to get request token")
+                print("Was not successful")
         }
-//        TwitterClient.sharedInstance.deauthorize()
-//        
-//        TwitterClient.sharedInstance.fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "mytwitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
-//            print("Got the request token!")
-//            
-//            let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
-//            UIApplication.sharedApplication().openURL(authURL!)
-//            
-//            }) { (error: NSError!) -> Void in
-//                print("Failed to get request token")
-//                self.loginFailure?(error)
-//        }
-//        
+
     }
 //
 //    func logout()
