@@ -27,7 +27,7 @@ class User: NSObject {
 
     func logout(){
         User.currentUser = nil
-        Client.sharedInstance.requestSerializer.removeAccessToken()
+        //Client.sharedInstance.requestSerializer.removeAccessToken()
         
         NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
     }
