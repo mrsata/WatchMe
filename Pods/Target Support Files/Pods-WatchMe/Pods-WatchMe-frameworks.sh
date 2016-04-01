@@ -85,9 +85,9 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WatchMe/AFNetworking.framework"
-  install_framework "Pods-WatchMe/BDBOAuth1Manager.framework"
+  install_framework "Pods-WatchMe/AFOAuth2Manager.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatchMe/AFNetworking.framework"
-  install_framework "Pods-WatchMe/BDBOAuth1Manager.framework"
+  install_framework "Pods-WatchMe/AFOAuth2Manager.framework"
 fi

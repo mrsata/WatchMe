@@ -4,7 +4,7 @@
  use_frameworks!
 
 target 'WatchMe' do
-    pod 'BDBOAuth1Manager'
     pod 'AFNetworking'
+    pod 'AFOAuth2Manager'
 end
 
