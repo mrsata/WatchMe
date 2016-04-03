@@ -76,6 +76,21 @@ class DiscoverViewController: UIViewController, UISearchBarDelegate, UITableView
         
     }
 
+    @IBAction func addCollection(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview as! EntertainmentCell
+        
+        let indexPath = tableView.indexPathForCell(cell)
+        
+        let entertainment = entertainments[indexPath!.row]
+        
+        Client.sharedInstance.addToCollection(entertainment, success: { () -> () in
+            
+            }) { (error: NSError) -> () in
+                
+        }
+    }
     /*
     // MARK: - Navigation
 

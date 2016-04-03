@@ -75,6 +75,67 @@ class Client: AFOAuth2Manager {
                 print("Did not get the search results")
         }
     }
+    
+    func addToCollection(entertainment: Entertainment,success: () -> (), failure: (NSError) -> ())
+    {
+//        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+//        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+//        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+//        
+//        let json: [String: AnyObject] = ["movies":["title": entertainment.title!,"year":entertainment.year!,"ids":entertainment.ids!]]
+//        //let jsonData = NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
+//        
+//        
+//        
+//        if(entertainment.type == "movie")
+//        {
+//            POST("https://api-v2launch.trakt.tv/sync/collection", parameters: json, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+//                print("Successfully added to collection")
+//                }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+//                    print("Did not add to collection")
+//            })
+//        }
+        let url = NSURL(string: "https://api-v2launch.trakt.tv/sync/collection")!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("2", forHTTPHeaderField: "trakt-api-version")
+        request.addValue("\(clientKey)", forHTTPHeaderField: "trakt-api-key")
+        
+        request.HTTPBody = "{\n  \"movies\": [\n    {\n      \"collected_at\": \"2014-09-01T09:10:11.000Z\",\n      \"title\": \"\(entertainment.title)\",\n      \"year\": \(entertainment.year),\n      \"ids\": {\n        \"trakt\":\(entertainment.ids!["trakt"]),\n        \"slug\": \"\(entertainment.ids!["slug"])\",\n        \"imdb\": \"\(entertainment.ids!["imbd"])\"\n]\n}".dataUsingEncoding(NSUTF8StringEncoding);
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if let response = response, data = data {
+                print(response)
+                print(String(data: data, encoding: NSUTF8StringEncoding))
+            } else {
+                print(error)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func getCollection(success: ([Entertainment]) -> (), failure: (NSError) -> ())
+    {
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+
+        GET("https://api-v2launch.trakt.tv/sync/collection/movies?extended=images", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            
+            print("Got the collection!")
+            let userDictionary = response as! [NSDictionary]
+            
+           }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Did not get the search results")
+        }
+
+    }
 //
 //    func logout()
 //    {

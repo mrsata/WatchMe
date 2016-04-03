@@ -42,6 +42,4 @@ class EntertainmentCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    @IBAction func addCollection(sender: AnyObject) {
-    }
 }

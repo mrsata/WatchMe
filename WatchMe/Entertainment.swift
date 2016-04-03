@@ -16,6 +16,7 @@ class Entertainment: NSObject {
     var content: String?
     var posterImageUrl: NSURL?
     var score:  Double?
+    var ids: NSDictionary?
     
     init(dictionary: NSDictionary)
     {
@@ -29,6 +30,8 @@ class Entertainment: NSObject {
             year = dictionary["movie"]!["year"] as? Int
             
             content = dictionary["movie"]!["overview"] as? String
+            
+            ids = (dictionary["movie"]!["ids"] as? NSDictionary)!
             
             var posterString = dictionary["movie"]!["images"]!!["poster"]!!["full"] as? String
             
@@ -49,6 +52,8 @@ class Entertainment: NSObject {
             year = dictionary["show"]!["year"] as? Int
             
             content = dictionary["show"]!["overview"] as? String
+            
+            ids = (dictionary["show"]!["ids"] as? NSDictionary)!
             
             var posterString = dictionary["show"]!["images"]!!["poster"]!!["full"] as? String
             
