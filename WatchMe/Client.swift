@@ -14,6 +14,9 @@ let clientSecret = "4c35bf1e4314f917b074ff720f3424cb49916bacce6df3695c92ee990c56
 let clientBaseUrl = NSURL(string: "https://api-v2launch.trakt.tv")
 
 class Client: AFOAuth2Manager {
+    
+    var accessToken: String!
+    
     class var sharedInstance: Client {
         struct Static{
             static let instance = Client(baseURL: clientBaseUrl, clientID: clientKey, secret:
@@ -37,13 +40,40 @@ class Client: AFOAuth2Manager {
         parameters["client_secret"] = clientSecret
         parameters["redirect_uri"] = "urn:ietf:wg:oauth:2.0:oob"
         parameters["grant_type"] = "authorization_code"
-        Client.sharedInstance.authenticateUsingOAuthWithURLString("https://api-v2launch.trakt.tv/oauth/token", parameters: parameters, success: { (accessToken: AFOAuthCredential!) -> Void in
+        Client.sharedInstance.authenticateUsingOAuthWithURLString("https://api-v2launch.trakt.tv/oauth/token", parameters: parameters, success: { (token: AFOAuthCredential!) -> Void in
             print("Was successful")
-            print(accessToken)
+            self.accessToken = token.accessToken
             }) { (error: NSError!) -> Void in
                 print("Was not successful")
         }
 
+    }
+    
+    func search(query: String?, type: String?, year: Int?,success: ([Entertainment]) -> (), failure: (NSError) -> ())
+    {
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+
+        var parameters: [String: AnyObject] = ["query": query!]
+        if type != nil
+        {
+            parameters["type"] = type
+        }
+        if year != nil
+        {
+            parameters["year"] = year
+        }
+        GET("https://api-v2launch.trakt.tv/search?type=movie,show", parameters: parameters, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            
+            print("Got the search results!")
+            let userDictionary = response as! [NSDictionary]
+            
+            let entertainments = Entertainment.toArray(userDictionary)
+            success(entertainments)
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Did not get the search results")
+        }
     }
 //
 //    func logout()

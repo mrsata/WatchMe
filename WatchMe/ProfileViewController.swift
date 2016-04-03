@@ -1,14 +1,14 @@
 //
-//  MeViewController.swift
+//  ProfileViewController.swift
 //  WatchMe
 //
-//  Created by Labuser on 3/22/16.
+//  Created by Grace Egbo on 4/2/16.
 //  Copyright © 2016 Grace. All rights reserved.
 //
 
 import UIKit
 
-class MeViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
