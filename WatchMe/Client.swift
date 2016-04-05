@@ -152,10 +152,10 @@ class Client: AFOAuth2Manager {
             
             for dictionary in userDictionary
             {
-                //dictionary.
+                print(dictionary)
+                dictionary["type"] = "Movie"
 
             }
-            print(userDictionary)
             success(Entertainment.toArray(userDictionary))
             }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("Did not get the search results")
