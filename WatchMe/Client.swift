@@ -126,15 +126,40 @@ class Client: AFOAuth2Manager {
         requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
         requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
 
-        GET("https://api-v2launch.trakt.tv/sync/collection/movies?extended=images", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+        GET("https://api-v2launch.trakt.tv/sync/collection/movies?extended=images,full", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             print("Got the collection!")
             let userDictionary = response as! [NSDictionary]
             
+            success(Entertainment.toArray(userDictionary))
            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("Did not get the search results")
         }
 
+    }
+    
+    func getMovieRecommendation(success: ([Entertainment]) -> (), failure: (NSError) -> ())
+    {
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+       
+        GET("https://api-v2launch.trakt.tv/recommendations/movies?extended=images,full&limit=5", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            
+            print("Got the movie recommendation!")
+            var userDictionary = response as! [NSDictionary]
+            
+            for dictionary in userDictionary
+            {
+                //dictionary.
+
+            }
+            print(userDictionary)
+            success(Entertainment.toArray(userDictionary))
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Did not get the search results")
+        }
     }
 //
 //    func logout()

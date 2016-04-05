@@ -17,14 +17,17 @@ class Entertainment: NSObject {
     var posterImageUrl: NSURL?
     var score:  Double?
     var ids: NSDictionary?
+    var posterImageString: String?
     
     init(dictionary: NSDictionary)
     {
+        super.init()
         score = dictionary["score"] as? Double
-        type = dictionary["type"] as? String
     
-        if(type == "movie")
+        if(dictionary["movie"] != nil || type == "Movie")
         {
+            type = "Movie"
+            
             title = dictionary["movie"]!["title"] as? String
             
             year = dictionary["movie"]!["year"] as? Int
@@ -33,20 +36,23 @@ class Entertainment: NSObject {
             
             ids = (dictionary["movie"]!["ids"] as? NSDictionary)!
             
-            var posterString = dictionary["movie"]!["images"]!!["poster"]!!["full"] as? String
+            let posterString = dictionary["movie"]!["images"]!!["poster"]!!["full"] as? String
             
             if let posterString = posterString
             {
+                posterImageString = posterString
                 posterImageUrl = NSURL(string: posterString)
             }
             else
             {
-                posterString = nil
+                posterImageUrl = nil
             }
 
         }
         else
         {
+            type = "Show"
+
             title = dictionary["show"]!["title"] as? String
             
             year = dictionary["show"]!["year"] as? Int
@@ -63,7 +69,7 @@ class Entertainment: NSObject {
             }
             else
             {
-                posterString = nil
+                posterImageUrl = nil
             }
 
         }
