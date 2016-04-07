@@ -49,7 +49,7 @@ class Entertainment: NSObject {
             }
 
         }
-        else
+        else if (dictionary["show"] != nil || type == "Show")
         {
             type = "Show"
 
