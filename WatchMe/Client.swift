@@ -17,6 +17,8 @@ class Client: AFOAuth2Manager {
     
     var accessToken: String!
     
+    var userMovieDictionary: [NSMutableDictionary] = []
+    
     class var sharedInstance: Client {
         struct Static{
             static let instance = Client(baseURL: clientBaseUrl, clientID: clientKey, secret:
@@ -148,15 +150,14 @@ class Client: AFOAuth2Manager {
         GET("https://api-v2launch.trakt.tv/recommendations/movies?extended=images,full&limit=5", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             print("Got the movie recommendation!")
-            var userDictionary = response as! [NSDictionary]
-            
-            for dictionary in userDictionary
-            {
-                print(dictionary)
-                dictionary["type"] = "Movie"
+            self.userMovieDictionary = response as! [NSMutableDictionary]
 
+            for var i = 0; i<self.userMovieDictionary.count; i++
+            {
+                self.userMovieDictionary[i] = self.userMovieDictionary[i].mutableCopy() as! NSMutableDictionary
+                self.userMovieDictionary[i].setValue("Movie", forKey: "type")
             }
-            success(Entertainment.toArray(userDictionary))
+            success(Entertainment.toArray(self.userMovieDictionary))
             }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("Did not get the search results")
         }
