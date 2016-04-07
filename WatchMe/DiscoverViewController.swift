@@ -8,9 +8,12 @@
 
 import UIKit
 
-class DiscoverViewController: UIViewController, UISearchBarDelegate {
+class DiscoverViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource,UITableViewDelegate {
+    @IBOutlet weak var tableView: UITableView!
 
     var searchBar:UISearchBar = UISearchBar()
+    
+    var entertainments: [Entertainment]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +22,12 @@ class DiscoverViewController: UIViewController, UISearchBarDelegate {
         
         // Initialize searchBar:
         searchBar.delegate = self
-        searchBar.placeholder = "Search your favorites"
+        searchBar.placeholder = "Discover something new"
         searchBar.sizeToFit()
         self.navigationItem.titleView = searchBar
         
+        tableView.dataSource = self
+        tableView.delegate = self      
         
     }
 
@@ -41,7 +46,51 @@ class DiscoverViewController: UIViewController, UISearchBarDelegate {
         self.searchBar.text = ""
         self.searchBar.resignFirstResponder()
     }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        print("Search button has been clicked")
+        
+        Client.sharedInstance.search(searchBar.text, type: nil, year: nil, success: { (data: [Entertainment]) -> () in
+            self.entertainments = data
+            self.tableView.reloadData()
+            }) { (error: NSError) -> () in
+                print(error)
+        }
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        if entertainments != nil {
+            return entertainments.count
+        }
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCellWithIdentifier("entertainmentCell", forIndexPath: indexPath) as! EntertainmentCell
+        
+        cell.entertainment = entertainments[indexPath.row]
+        
+        return cell
+        
+    }
 
+    @IBAction func addCollection(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview as! EntertainmentCell
+        
+        let indexPath = tableView.indexPathForCell(cell)
+        
+        let entertainment = entertainments[indexPath!.row]
+        
+        Client.sharedInstance.addToCollection(entertainment, success: { () -> () in
+            
+            }) { (error: NSError) -> () in
+                
+        }
+    }
     /*
     // MARK: - Navigation
 

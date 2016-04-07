@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BDBOAuth1Manager.xcscheme</key>
+		<key>AFOAuth2Manager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1C3436CEA5C3D39764C5F54374794ECB</key>
+		<key>1D01A0FBC070EAE24E44CA973E453454</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>445B3D47256376A8FB06D383FDBEA0C4</key>
+		<key>4878C70B21CA37D7CB8A476BF986741B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4ECF0CF06261F46A45C43290CC288F52</key>
+		<key>6494C9571053EF91A907EA516BB39FA5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
