@@ -8,7 +8,7 @@
 
 import UIKit
 
-var _currentUser: User?
+
 let currentUserKey = "kCurrentKey"
 let userDidLoginNotification = "userDidLoginNotification"
 let userDidLogoutNotification = "userDidLogoutNotification"
@@ -32,6 +32,9 @@ class User: NSObject {
         NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
     }
 
+    
+    static var _currentUser: User?
+    
     class var currentUser: User? {
         get {
         if _currentUser == nil {

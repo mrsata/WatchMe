@@ -54,6 +54,7 @@ class LoginViewController: UIViewController {
         
         Client.sharedInstance.login(pin!, success: { () -> () in
             
+            self.performSegueWithIdentifier("loginSegue", sender: nil)
             }) { (error: NSError) -> () in
                 
         }
