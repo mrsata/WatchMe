@@ -13,6 +13,13 @@ class ProfileViewController: UIViewController {
     var numCollection: Int?
     
     var user: User!
+    
+    
+
+    @IBOutlet weak var username: UILabel!
+    
+    @IBOutlet weak var numCollected: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +27,7 @@ class ProfileViewController: UIViewController {
         Client.sharedInstance.getSettings({ (info: User) -> () in
             self.user = info
             }) { (error: NSError) -> () in
-                
+            
         }
         
         Client.sharedInstance.getStats("IodineXXY", success: { (response: NSDictionary) -> () in
@@ -37,7 +44,11 @@ class ProfileViewController: UIViewController {
                 
         }
         print(numCollection)
-
+        
+        numCollected.text = "\(numCollection!)"
+        
+    
+    
     }
 
     override func didReceiveMemoryWarning() {
