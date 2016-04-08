@@ -45,9 +45,9 @@ class ProfileViewController: UIViewController {
         }
         print(numCollection)
         
-        numCollected.text = "\(numCollection!)"
+        numCollected.text = "\(numCollection)"
         
-    
+        
     
     }
 
