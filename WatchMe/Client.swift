@@ -162,7 +162,6 @@ class Client: AFOAuth2Manager {
                 print("Did not get the search results")
         }
     }
-    
 //
 //    func logout()
 //    {
