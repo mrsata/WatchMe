@@ -140,7 +140,7 @@ class Client: AFOAuth2Manager {
 
     }
     
-    func getMovieRecommendation(success: ([Entertainment]) -> (), failure: (NSError) -> ())
+    func getMovieRecommendation(success: ([Recommendation]) -> (), failure: (NSError) -> ())
     {
         requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
         requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
@@ -157,11 +157,12 @@ class Client: AFOAuth2Manager {
                 self.userMovieDictionary[i] = self.userMovieDictionary[i].mutableCopy() as! NSMutableDictionary
                 self.userMovieDictionary[i].setValue("Movie", forKey: "type")
             }
-            success(Entertainment.toArray(self.userMovieDictionary))
+            success(Recommendation.toArray(self.userMovieDictionary))
             }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("Did not get the search results")
         }
     }
+    
 //
 //    func logout()
 //    {

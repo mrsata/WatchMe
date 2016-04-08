@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
     @IBAction func onSignIn(sender: AnyObject) {
         
         let webView: UIWebView = UIWebView()
-        webView.frame = CGRectMake(0, 20, 320, 420)
+        webView.frame = CGRectMake(0, 120, 320, 420)
         webView.loadRequest(NSURLRequest(URL: NSURL(string: "https://api-v2launch.trakt.tv/oauth/authorize?response_type=code&client_id=\(clientKey)&redirect_uri=urn:ietf:wg:oauth:2.0:oob")!))
         self.view!.addSubview(webView)
         textField.hidden = false;

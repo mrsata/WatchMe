@@ -8,17 +8,43 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
+class ProfileViewController: UIViewController, UIScrollViewDelegate {
+    //Test Scroll View
+    
+    @IBOutlet weak var foreground: UIScrollView!
+    
+    @IBOutlet weak var username: UILabel!
+    
+    @IBOutlet weak var numCollect: UILabel!
+    
+    
+    
+   
+    
+    var user: User!
+    var item: Entertainment!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        username.text = user!.name
+        numCollect.text = "\(user!.numCollection)"
+        
+        
 
-        // Do any additional setup after loading the view.
+        
     }
 
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        let foregroundHeight = foreground.contentSize.height - CGRectGetHeight(foreground.bounds)
+        let percentageScroll = foreground.contentOffset.y / foregroundHeight
+        foreground.contentOffset = CGPoint(x: 0, y: foregroundHeight * percentageScroll)
+        }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 

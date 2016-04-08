@@ -23,6 +23,8 @@ class User: NSObject {
         self.dictionary = dictionary
         
         name = dictionary["username"] as? String
+        numCollection = dictionary["collected"] as? Int
+        
     }
 
     func logout(){

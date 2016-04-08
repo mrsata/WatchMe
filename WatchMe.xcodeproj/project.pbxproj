@@ -17,6 +17,7 @@
 		68B680D91CA21E2C000DC9EF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680D81CA21E2C000DC9EF /* CollectionViewController.swift */; };
 		68B680DB1CA21E37000DC9EF /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */; };
 		68B680E11CADEFA5000DC9EF /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680E01CADEFA5000DC9EF /* Client.swift */; };
+		68B680E31CB730EA000DC9EF /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680E21CB730EA000DC9EF /* Recommendation.swift */; };
 		9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */; };
 		9BE5721B1CAB5BD20025A19E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */; };
 		EA3B248E1CB1A1FC0072B1ED /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3B248D1CB1A1FC0072B1ED /* CollectionViewCell.swift */; };
@@ -41,6 +42,7 @@
 		68B680D81CA21E2C000DC9EF /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		68B680E01CADEFA5000DC9EF /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		68B680E21CB730EA000DC9EF /* Recommendation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.release.xcconfig"; sourceTree = "<group>"; };
 		9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				6886EC2B1CA4E07A0040DE8F /* User.swift */,
 				EA5EFC801CB0B9A000BE6644 /* Entertainment.swift */,
+				68B680E21CB730EA000DC9EF /* Recommendation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				68B680D91CA21E2C000DC9EF /* CollectionViewController.swift in Sources */,
 				9BE5721B1CAB5BD20025A19E /* LoginViewController.swift in Sources */,
 				68B680E11CADEFA5000DC9EF /* Client.swift in Sources */,
+				68B680E31CB730EA000DC9EF /* Recommendation.swift in Sources */,
 				9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
