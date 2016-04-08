@@ -33,23 +33,28 @@ class Client: AFOAuth2Manager {
     var loginSuccess: (() -> ())?
     var loginFailure: ((NSError) -> ())?
     
-    func login(pin: String, success: () -> (), failure: (NSError) -> ())
+    func login(code: String)
     {
-        loginSuccess = success
-        loginFailure = failure
        
-        var parameters: [String: String] = ["code": pin]
+        var parameters: [String: String] = ["code": code]
         parameters["client_id"] =  clientKey
         parameters["client_secret"] = clientSecret
-        parameters["redirect_uri"] = "urn:ietf:wg:oauth:2.0:oob"
+        parameters["redirect_uri"] = "watchme://oauth"
         parameters["grant_type"] = "authorization_code"
         Client.sharedInstance.authenticateUsingOAuthWithURLString("https://api-v2launch.trakt.tv/oauth/token", parameters: parameters, success: { (token: AFOAuthCredential!) -> Void in
-            print("Was successful")
+            print("Was successful!")
             self.accessToken = token.accessToken
+            self.loginSuccess!()
             }) { (error: NSError!) -> Void in
-                print("Was not successful")
+                print("Was not successful!")
+                self.loginFailure!(error)
         }
 
+    }
+    func loginWithCallback(success: () -> (), failure: (NSError) -> ()){
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://api-v2launch.trakt.tv/oauth/authorize?response_type=code&client_id=\(clientKey)&redirect_uri=watchme://oauth")!)
+        loginSuccess = success
+        loginFailure = failure
     }
     
     func search(query: String?, type: String?, year: Int?,success: ([Entertainment]) -> (), failure: (NSError) -> ())
@@ -153,7 +158,7 @@ class Client: AFOAuth2Manager {
             print("Got the movie recommendation!")
             self.userMovieDictionary = response as! [NSMutableDictionary]
 
-            for var i = 0; i<self.userMovieDictionary.count; i++
+            for i in 0 ..< self.userMovieDictionary.count
             {
                 self.userMovieDictionary[i] = self.userMovieDictionary[i].mutableCopy() as! NSMutableDictionary
                 self.userMovieDictionary[i].setValue("Movie", forKey: "type")
