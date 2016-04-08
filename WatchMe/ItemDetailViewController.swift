@@ -29,7 +29,7 @@ class ItemDetailViewController: UIViewController {
     
     var entertainment: Entertainment!
     
-    var recommendations: [Entertainment]!
+    var recommendations: [Recommendation]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +41,23 @@ class ItemDetailViewController: UIViewController {
         mainDescriptionLabel.text = entertainment.content
         mainDescriptionLabel.sizeToFit()
         
-        Client.sharedInstance.getMovieRecommendation({ (response: [Entertainment]) -> () in
-            self.recommendations = response
+        Client.sharedInstance.getMovieRecommendation({ (response: [Recommendation]) -> () in
+            //self.recommendations = response
+            
+            self.recommended1ImageView.setImageWithURL(response[0].posterImageUrl!)
+            self.recommended2ImageView.setImageWithURL(response[1].posterImageUrl!)
+            self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
+            self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
+            
+            self.recommended1TitleLabel.text = response[0].title
+            self.recommended2TitleLabel.text = response[1].title
+            self.recommended3TitleLabel.text = response[2].title
+            self.recommended4TitleLabel.text = response[3].title
+
             }) { (error: NSError) -> () in
                 
         }
+
     }
 
     override func didReceiveMemoryWarning() {
