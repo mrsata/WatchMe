@@ -5,9 +5,9 @@ Description: Provides a way to quickly access the movie and tv details you love
 ## User Stories
 
 Required user stories: 
-- [ ] User is able to search for a movie/tv show and add to collection
-- [ ] Recommend similar movies/tv shows based on current collection 
-- [ ] Tells you when the next tv episode/movie is out and post movie/tv suggestions to a social media site 
+- [X] User is able to search for a movie/tv show and add to collection
+- [X] Recommend similar movies/tv shows based on current collection 
+- [X] Tells you when the next tv episode/movie is out and post movie/tv suggestions to a social media site 
 
 Optional User Stories:
 - [ ] User can connect the app with Google Calendar and put the date for the next tv episode/movie on it.
@@ -33,4 +33,6 @@ Optional User Stories:
 2. TV: http://www.programmableweb.com/api/tv-media-tv-listings
 3. Google calendar: https://developers.google.com/google-apps/calendar/
 
+## Current Walkthrough 
 
+<img src = 'https://raw.githubusercontent.com/Codepath-Final-Project/WatchMe/master/Walkthrough.gif'>
