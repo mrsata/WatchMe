@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class ItemDetailViewController: UIViewController {
     @IBOutlet weak var mainImageView: UIImageView!
@@ -26,8 +27,6 @@ class ItemDetailViewController: UIViewController {
     @IBOutlet weak var recommended3TitleLabel: UILabel!
     @IBOutlet weak var recommended4TitleLabel: UILabel!
     
-    
-
     var entertainment: Entertainment!
     
     var recommendations: [Entertainment]!
@@ -54,6 +53,44 @@ class ItemDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBAction func facebookBtn(sender: AnyObject) {
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
+            
+            print("ready to share on Facebook")
+
+            var fbShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            
+            self.presentViewController(fbShare, animated: true, completion: nil)
+            
+        } else {
+            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @IBAction func twitterBtn(sender: AnyObject) {
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+            
+            print("ready to share on Twitter")
+            
+            var tweetShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            
+            self.presentViewController(tweetShare, animated: true, completion: nil)
+            
+        } else {
+            
+            var alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to tweet.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+
 
     /*
     // MARK: - Navigation
