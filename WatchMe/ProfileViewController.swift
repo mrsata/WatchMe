@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
             
             let epiNum = response["episodes"]!["collected"] as? Int
             
-            self.numCollection = (movNum! + showNum! + epiNum!) as? Int
+            self.numCollection = (movNum! + showNum! + epiNum!) as Int
             }) { (error: NSError) -> () in
                 
         }
