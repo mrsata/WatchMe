@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Current user detected: \(User.currentUser?.name)")
             // Load the storyboard later.
         }
+        
         return true
     }
 

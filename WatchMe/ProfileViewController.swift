@@ -10,10 +10,34 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    var numCollection: Int?
+    
+    var user: User!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        Client.sharedInstance.getSettings({ (info: User) -> () in
+            self.user = info
+            }) { (error: NSError) -> () in
+                
+        }
+        
+        Client.sharedInstance.getStats("IodineXXY", success: { (response: NSDictionary) -> () in
+            
+            let movNum = response["movies"]!["collected"] as? Int
+            print(movNum)
+            
+            let showNum = response["shows"]!["collected"] as? Int
+            
+            let epiNum = response["episodes"]!["collected"] as? Int
+            
+            self.numCollection = (movNum! + showNum! + epiNum!) as? Int
+            }) { (error: NSError) -> () in
+                
+        }
+        print(numCollection)
+
     }
 
     override func didReceiveMemoryWarning() {
