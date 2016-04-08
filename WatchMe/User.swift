@@ -24,7 +24,6 @@ class User: NSObject {
         super.init()
         
         name = dictionary["user"]!["username"] as? String
-       
     }
 
     func logout(){
