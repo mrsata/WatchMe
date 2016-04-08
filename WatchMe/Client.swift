@@ -19,6 +19,7 @@ class Client: AFOAuth2Manager {
     
     var userMovieDictionary: [NSMutableDictionary] = []
     
+   
     class var sharedInstance: Client {
         struct Static{
             static let instance = Client(baseURL: clientBaseUrl, clientID: clientKey, secret:
@@ -160,6 +161,38 @@ class Client: AFOAuth2Manager {
             success(Recommendation.toArray(self.userMovieDictionary))
             }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("Did not get the search results")
+        }
+    }
+    
+    func getSettings(success: (User) -> (), failure: (NSError) -> ())
+    {
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        GET("https://api-v2launch.trakt.tv/users/settings", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            print("Got the user settings!")
+            success(User.init(dictionary: response as! NSDictionary))
+            
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Did not get user settings")
+        }
+        
+    }
+    
+    func getStats(username: String, success: (NSDictionary) -> (), failure: (NSError) -> ())
+    {
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+
+        GET("https://api-v2launch.trakt.tv/users/\(username)/stats", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            print("Got the stats!")
+            success(response as! NSDictionary)
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Did not get stats")
         }
     }
 //
