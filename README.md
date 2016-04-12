@@ -11,7 +11,8 @@ Required user stories:
 
 Optional User Stories:
 - [ ] User can connect the app with Google Calendar and put the date for the next tv episode/movie on it.
-- [ ] Be able to swipe in from the left and choose between different windows
+- [ ] Utlize tab bar to switch between programs
+- [ ] Show most popular/most watched on search screen 
 
 #### Wireframes:
 <img src = 'http://i.imgur.com/U9l5nGt.jpg' title='Wireframes' width='300' alt='Wireframes' />
