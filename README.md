@@ -11,7 +11,7 @@ Required user stories:
 
 Optional User Stories:
 - [ ] User can connect the app with Google Calendar and put the date for the next tv episode/movie on it.
-- [ ] Utlize tab bar to switch between programs
+- [X] Utlize tab bar to switch between programs
 - [ ] Show most popular/most watched on search screen 
 
 #### Wireframes:
