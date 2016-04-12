@@ -26,6 +26,7 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         Client.sharedInstance.getSettings({ (info: User) -> () in
             self.user = info
+            self.username.text = self.user.name
             }) { (error: NSError) -> () in
             
         }
@@ -40,12 +41,14 @@ class ProfileViewController: UIViewController {
             let epiNum = response["episodes"]!["collected"] as? Int
             
             self.numCollection = (movNum! + showNum! + epiNum!) as Int
+          
+            self.numCollected.text = "\(self.numCollection!)"
             }) { (error: NSError) -> () in
-                
+           
         }
-        print(numCollection)
+
         
-        numCollected.text = "\(numCollection)"
+        
         
         
     
