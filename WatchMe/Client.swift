@@ -86,38 +86,20 @@ class Client: AFOAuth2Manager {
     
     func addToCollection(entertainment: Entertainment,success: () -> (), failure: (NSError) -> ())
     {
-//        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
-//        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
-//        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-//        
-//        let json: [String: AnyObject] = ["movies":["title": entertainment.title!,"year":entertainment.year!,"ids":entertainment.ids!]]
-//        //let jsonData = NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-//        
-//        
-//        
-//        if(entertainment.type == "movie")
-//        {
-//            POST("https://api-v2launch.trakt.tv/sync/collection", parameters: json, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-//                print("Successfully added to collection")
-//                }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
-//                    print("Did not add to collection")
-//            })
-//        }
         let url = NSURL(string: "https://api-v2launch.trakt.tv/sync/collection")!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("2", forHTTPHeaderField: "trakt-api-version")
-        request.addValue("\(clientKey)", forHTTPHeaderField: "trakt-api-key")
+        request.addValue(clientKey, forHTTPHeaderField: "trakt-api-key")
         
-        request.HTTPBody = "{\n  \"movies\": [\n    {\n      \"collected_at\": \"2014-09-01T09:10:11.000Z\",\n      \"title\": \"\(entertainment.title)\",\n      \"year\": \(entertainment.year),\n      \"ids\": {\n        \"trakt\":\(entertainment.ids!["trakt"]),\n        \"slug\": \"\(entertainment.ids!["slug"])\",\n        \"imdb\": \"\(entertainment.ids!["imbd"])\"\n]\n}".dataUsingEncoding(NSUTF8StringEncoding);
+        request.HTTPBody = "{\n  \"movies\": [\n    {\n      \"collected_at\": \"2014-09-01T09:10:11.000Z\",\n      \"title\": \"Batman Begins\",\n      \"year\": 2005,\n      \"ids\": {\n        \"trakt\": 1,\n        \"slug\": \"batman-begins-2005\",\n        \"imdb\": \"tt0372784\",\n        \"tmdb\": 272\n      }\n    },\n    {\n      \"ids\": {\n        \"imdb\": \"tt0000111\"\n      }\n    }\n  ],\n  \"shows\": [\n    {\n      \"title\": \"Breaking Bad\",\n      \"year\": 2008,\n      \"ids\": {\n        \"trakt\": 1,\n        \"slug\": \"breaking-bad\",\n        \"tvdb\": 81189,\n        \"imdb\": \"tt0903747\",\n        \"tmdb\": 1396,\n        \"tvrage\": 18164\n      }\n    },\n    {\n      \"title\": \"The Walking Dead\",\n      \"year\": 2010,\n      \"ids\": {\n        \"trakt\": 2,\n        \"slug\": \"the-walking-dead\",\n        \"tvdb\": 153021,\n        \"imdb\": \"tt1520211\",\n        \"tmdb\": 1402,\n        \"tvrage\": 25056\n      },\n      \"seasons\": [\n        {\n          \"number\": 3\n        }\n      ]\n    },\n    {\n      \"title\": \"Mad Men\",\n      \"year\": 2007,\n      \"ids\": {\n        \"trakt\": 4,\n        \"slug\": \"mad-men\",\n        \"tvdb\": 80337,\n        \"imdb\": \"tt0804503\",\n        \"tmdb\": 1104,\n        \"tvrage\": 16356\n      },\n      \"seasons\": [\n        {\n          \"number\": 1,\n          \"episodes\": [\n            {\n              \"number\": 1\n            },\n            {\n              \"number\": 2\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"episodes\": [\n    {\n      \"ids\": {\n        \"trakt\": 1061,\n        \"tvdb\": 1555111,\n        \"imdb\": \"tt007404\",\n        \"tmdb\": 422183,\n        \"tvrage\": 12345\n      }\n    }\n  ]\n}".dataUsingEncoding(NSUTF8StringEncoding);
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if let response = response, data = data {
-                print(response)
+                print("Was successful")
                 print(String(data: data, encoding: NSUTF8StringEncoding))
             } else {
                 print(error)
@@ -198,6 +180,21 @@ class Client: AFOAuth2Manager {
             success(response as! NSDictionary)
             }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("Did not get stats")
+        }
+    }
+    
+    func getNextEpisode(success: () -> (), failure: (NSError) ->())
+    {
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        GET("https://api-v2launch.trakt.tv/shows/game-of-thrones/progress/collection?hidden=false&specials=false", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            print("Got the next episode!")
+            print(response as! NSDictionary)
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Did not get the next episode")
         }
     }
 //

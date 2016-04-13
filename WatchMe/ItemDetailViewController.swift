@@ -57,6 +57,12 @@ class ItemDetailViewController: UIViewController {
             }) { (error: NSError) -> () in
                 
         }
+        
+        Client.sharedInstance.getNextEpisode({ () -> () in
+            
+            }) { (error: NSError) -> () in
+                
+        }
 
     }
 
