@@ -33,7 +33,7 @@ class ItemDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         mainTitleLabel.text = entertainment.title
@@ -53,13 +53,13 @@ class ItemDetailViewController: UIViewController {
             self.recommended2TitleLabel.text = response[1].title
             self.recommended3TitleLabel.text = response[2].title
             self.recommended4TitleLabel.text = response[3].title
-
-            }) { (error: NSError) -> () in
-                
+            
+        }) { (error: NSError) -> () in
+            
         }
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -70,7 +70,7 @@ class ItemDetailViewController: UIViewController {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
             
             print("ready to share on Facebook")
-
+            
             let fbShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             
             self.presentViewController(fbShare, animated: true, completion: nil)
@@ -102,16 +102,16 @@ class ItemDetailViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
-
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

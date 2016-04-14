@@ -20,6 +20,7 @@
 		68B680E31CB730EA000DC9EF /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680E21CB730EA000DC9EF /* Recommendation.swift */; };
 		9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */; };
 		9BE5721B1CAB5BD20025A19E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */; };
+		9BEB8FAC1CC0432700A4260E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEB8FAB1CC0432700A4260E /* SearchViewController.swift */; };
 		EA3B248E1CB1A1FC0072B1ED /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3B248D1CB1A1FC0072B1ED /* CollectionViewCell.swift */; };
 		EA5EFC7F1CB0A03300BE6644 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5EFC7E1CB0A03300BE6644 /* ProfileViewController.swift */; };
 		EA5EFC811CB0B9A000BE6644 /* Entertainment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5EFC801CB0B9A000BE6644 /* Entertainment.swift */; };
@@ -46,6 +47,7 @@
 		76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.release.xcconfig"; sourceTree = "<group>"; };
 		9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9BEB8FAB1CC0432700A4260E /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EA3B248D1CB1A1FC0072B1ED /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		EA5EFC7E1CB0A03300BE6644 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EA5EFC801CB0B9A000BE6644 /* Entertainment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entertainment.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */,
 				68B680D81CA21E2C000DC9EF /* CollectionViewController.swift */,
 				68B680D41CA21DF5000DC9EF /* DiscoverViewController.swift */,
+				9BEB8FAB1CC0432700A4260E /* SearchViewController.swift */,
 				68B680D61CA21E06000DC9EF /* SearchDetailViewController.swift */,
 				68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */,
 				9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */,
@@ -279,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BEB8FAC1CC0432700A4260E /* SearchViewController.swift in Sources */,
 				EA5EFC811CB0B9A000BE6644 /* Entertainment.swift in Sources */,
 				68B680D51CA21DF5000DC9EF /* DiscoverViewController.swift in Sources */,
 				68B680DB1CA21E37000DC9EF /* ItemDetailViewController.swift in Sources */,

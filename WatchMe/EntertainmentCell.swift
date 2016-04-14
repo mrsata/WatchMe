@@ -25,7 +25,12 @@ class EntertainmentCell: UITableViewCell {
             typeLabel.text = entertainment.type?.uppercaseString
             descriptionLabel.text = entertainment.content
             yearLabel.text = "(\(entertainment.year!))"
-            posterImageView.setImageWithURL(entertainment.posterImageUrl!)
+            if let posterImageUrl = entertainment.posterImageUrl {
+                posterImageView.setImageWithURL(posterImageUrl)
+            } else {
+                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
+                posterImageView.setImageWithURL(noImageUrl)
+            }
         }
     }
 
