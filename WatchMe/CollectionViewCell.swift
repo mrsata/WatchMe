@@ -14,6 +14,12 @@ class CollectionViewCell: UICollectionViewCell {
     
     var entertainment: Entertainment! {
         didSet{
+//            if let posterImageUrl = entertainment.posterImageUrl {
+//                posterImageView.setImageWithURL(posterImageUrl)
+//            } else {
+//                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
+//                posterImageView.setImageWithURL(noImageUrl)
+//            }
             posterImageView.setImageWithURL(entertainment.posterImageUrl!)
         }
     }

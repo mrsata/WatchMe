@@ -9,96 +9,74 @@
 import UIKit
 
 class DiscoverViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource,UITableViewDelegate {
-    @IBOutlet weak var tableView: UITableView!
-
-    var searchBar:UISearchBar = UISearchBar()
     
-    var entertainments: [Entertainment]!
+    @IBOutlet weak var trendingMoviesTableView: UITableView!
+    
+    var trendingMovies: [Entertainment]!
+    var trendingShows:  [Entertainment]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
-        // Initialize searchBar:
-        searchBar.delegate = self
-        searchBar.placeholder = "Discover something new"
-        searchBar.sizeToFit()
-        self.navigationItem.titleView = searchBar
         
-        tableView.dataSource = self
-        tableView.delegate = self      
+        trendingMoviesTableView.dataSource = self
+        trendingMoviesTableView.delegate = self
+        
+        // displayTrendingMovies()
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // Functions for searchBar:
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        self.searchBar.showsCancelButton = true
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        self.searchBar.showsCancelButton = false
-        self.searchBar.text = ""
-        self.searchBar.resignFirstResponder()
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        print("Search button has been clicked")
-        
-        Client.sharedInstance.search(searchBar.text, type: nil, year: nil, success: { (data: [Entertainment]) -> () in
-            self.entertainments = data
-            self.tableView.reloadData()
-            }) { (error: NSError) -> () in
-                print(error)
+    // Display main contents:
+    func displayTrendingMovies(){
+        Client.sharedInstance.getTrendingMovies( { (data: [Entertainment]) -> () in
+            self.trendingMovies = data
+            self.trendingMoviesTableView.reloadData()
+        }) { (error: NSError) -> () in
+            print(error)
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if entertainments != nil {
-            return entertainments.count
+        var count:Int?
+        
+        count = 0
+        
+        if tableView == self.trendingMoviesTableView {
+            if trendingMovies != nil {
+                count = trendingMovies.count
+            }
         }
-        return 0
+        
+        return count!
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("entertainmentCell", forIndexPath: indexPath) as! EntertainmentCell
         
-        cell.entertainment = entertainments[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("trendingMoviesCell", forIndexPath: indexPath) as! EntertainmentCell
+        
+        cell.entertainment = trendingMovies[indexPath.row]
         
         return cell
         
     }
-
-    @IBAction func addCollection(sender: AnyObject) {
-        let button = sender as! UIButton
-        let view = button.superview!
-        let cell = view.superview as! EntertainmentCell
-        
-        let indexPath = tableView.indexPathForCell(cell)
-        
-        let entertainment = entertainments[indexPath!.row]
-        
-        Client.sharedInstance.addToCollection(entertainment, success: { () -> () in
-            
-            }) { (error: NSError) -> () in
-                
-        }
-    }
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
