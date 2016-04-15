@@ -58,6 +58,13 @@ class ItemDetailViewController: UIViewController {
             
         }
         
+        
+        Client.sharedInstance.getNextEpisode({ () -> () in
+            
+            }) { (error: NSError) -> () in
+                
+        }
+
     }
     
     override func didReceiveMemoryWarning() {
