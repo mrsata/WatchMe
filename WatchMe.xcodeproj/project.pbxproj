@@ -18,6 +18,7 @@
 		68B680DB1CA21E37000DC9EF /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */; };
 		68B680E11CADEFA5000DC9EF /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680E01CADEFA5000DC9EF /* Client.swift */; };
 		68B680E31CB730EA000DC9EF /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B680E21CB730EA000DC9EF /* Recommendation.swift */; };
+		958696E91CC09A7B000A431B /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958696E81CC09A7B000A431B /* ProfileCollectionViewController.swift */; };
 		9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */; };
 		9BE5721B1CAB5BD20025A19E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */; };
 		9BEB8FAC1CC0432700A4260E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEB8FAB1CC0432700A4260E /* SearchViewController.swift */; };
@@ -45,6 +46,7 @@
 		68B680E01CADEFA5000DC9EF /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		68B680E21CB730EA000DC9EF /* Recommendation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.release.xcconfig"; sourceTree = "<group>"; };
+		958696E81CC09A7B000A431B /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9BEB8FAB1CC0432700A4260E /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */,
 				9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */,
 				EA5EFC7E1CB0A03300BE6644 /* ProfileViewController.swift */,
+				958696E81CC09A7B000A431B /* ProfileCollectionViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				EA3B248E1CB1A1FC0072B1ED /* CollectionViewCell.swift in Sources */,
 				68B680D91CA21E2C000DC9EF /* CollectionViewController.swift in Sources */,
 				9BE5721B1CAB5BD20025A19E /* LoginViewController.swift in Sources */,
+				958696E91CC09A7B000A431B /* ProfileCollectionViewController.swift in Sources */,
 				68B680E11CADEFA5000DC9EF /* Client.swift in Sources */,
 				68B680E31CB730EA000DC9EF /* Recommendation.swift in Sources */,
 				9B6C153C1CA4D5C200EFD107 /* MainViewController.swift in Sources */,
