@@ -8,17 +8,10 @@
 
 import UIKit
 
-
 class LoginViewController: UIViewController {
-
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var enterButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        textField.hidden = true;
-        enterButton.hidden = true;
         // Do any additional setup after loading the view.
     }
 
@@ -26,7 +19,6 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -39,32 +31,12 @@ class LoginViewController: UIViewController {
     */
 
     @IBAction func onSignIn(sender: AnyObject) {
-        
-//        let webView: UIWebView = UIWebView()
-//        webView.frame = CGRectMake(0, 120, 320, 420)
-//        webView.loadRequest(NSURLRequest(URL: NSURL(string: "https://api-v2launch.trakt.tv/oauth/authorize?response_type=code&client_id=\(clientKey)&redirect_uri=liuhangod://oauth")!))
-//        self.view!.addSubview(webView)
-//        textField.hidden = false;
-//        enterButton.hidden = false;
-//        textField.placeholder = "Enter pin here"
+
         Client.sharedInstance.loginWithCallback({ () -> () in
             self.performSegueWithIdentifier("loginSegue", sender: nil)
         }) { (error: NSError) -> () in
             
         }
     }
-    
-    @IBAction func onEnter(sender: AnyObject) {
-//        let pin = textField.text
-//
-//        Client.sharedInstance.login(pin!, success: { () -> () in
-//            
-//            self.performSegueWithIdentifier("loginSegue", sender: nil)
-//            }) { (error: NSError) -> () in
-//                
-//        }
-    }
-
-    
 
 }
