@@ -27,7 +27,7 @@ class Recommendation: NSObject {
         
         ids = dictionary["ids"] as? NSDictionary
         
-        let posterString = dictionary["images"]!["poster"]!!["full"] as? String
+        let posterString = dictionary["images"]!["poster"]!!["thumb"] as? String
         
         if let posterString = posterString
         {
