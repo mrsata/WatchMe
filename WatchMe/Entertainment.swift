@@ -37,7 +37,7 @@ class Entertainment: NSObject {
             
             ids = (dictionary["movie"]!["ids"] as? NSDictionary)!
             
-            let posterString = dictionary["movie"]!["images"]!!["poster"]!!["full"] as? String
+            let posterString = dictionary["movie"]!["images"]!!["poster"]!!["thumb"] as? String
             
             if let posterString = posterString
             {
@@ -64,7 +64,7 @@ class Entertainment: NSObject {
             
             ids = (dictionary["show"]!["ids"] as? NSDictionary)!
             
-            let posterString = dictionary["show"]!["images"]!!["poster"]!!["full"] as? String
+            let posterString = dictionary["show"]!["images"]!!["poster"]!!["thumb"] as? String
             
             if let posterString = posterString
             {

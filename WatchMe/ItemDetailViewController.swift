@@ -10,6 +10,7 @@ import UIKit
 import Social
 
 class ItemDetailViewController: UIViewController {
+    
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var mainDescriptionLabel: UILabel!

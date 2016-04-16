@@ -11,7 +11,6 @@ import UIKit
 class CollectionViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
-
     
     var collection: [Entertainment]!
     override func viewDidLoad() {
@@ -74,7 +73,6 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource,UIC
         // Pass the selected object to the new view controller.
         
         let cell = sender as! UICollectionViewCell
-        
         
         let indexPath = collectionView.indexPathForCell(cell)
         let movie = collection[indexPath!.row]

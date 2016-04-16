@@ -208,16 +208,10 @@ class Client: AFOAuth2Manager {
         requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
         requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
         requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        requestSerializer.setValue("1", forHTTPHeaderField: "X-Pagination-Page")
-        requestSerializer.setValue("10", forHTTPHeaderField: "X-Pagination-Limit")
-        requestSerializer.setValue("10", forHTTPHeaderField: "X-Pagination-Page-Count")
-        requestSerializer.setValue("100", forHTTPHeaderField: "X-Pagination-Item-Count")
-        requestSerializer.setValue("1721", forHTTPHeaderField: "X-Trending-User-Count")
         
-        GET("https://api-v2launch.trakt.tv/movies/trending?extended=images,full&limit=5", parameters: nil, success: {
+        GET("https://api-v2launch.trakt.tv/movies/trending?extended=images,full&limit=30", parameters: nil, success: {
             (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             print("Succeed in getting trending movies")
-            // print(response)
             let userDictionary = response as! [NSDictionary]
             let trendingMovies = Entertainment.toArray(userDictionary)
             success(trendingMovies)
@@ -226,12 +220,30 @@ class Client: AFOAuth2Manager {
         }
         
     }
+
+    func getTrendingShows(success: ([Entertainment]) -> (), failure: (NSError) -> ()){
+        
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        GET("https://api-v2launch.trakt.tv/shows/trending?extended=images,full&limit=30", parameters: nil, success: {
+            (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            print("Succeed in getting trending shows")
+            let userDictionary = response as! [NSDictionary]
+            let trendingShows = Entertainment.toArray(userDictionary)
+            success(trendingShows)
+        }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+            print("Failed getting trending shows")
+        }
+        
+    }
     
     func getNextEpisode(success: () -> (), failure: (NSError) ->()){
         
         GET("https://api-v2launch.trakt.tv/shows/game-of-thrones/progress/collection?hidden=false&specials=false", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             print("Got the next episode!")
-            print(response as! NSDictionary)
         }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
             print("Did not get the next episode")
         }
