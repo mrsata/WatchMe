@@ -9,22 +9,26 @@
 import UIKit
 
 class Entertainment: NSObject {
-
+    
     var title: String?
     var year: Int?
     var type: String?
     var content: String?
-    var posterImageUrl: NSURL?
     var score:  Double?
     var ids: NSDictionary?
+    var posterImageUrl: NSURL?
     var posterImageString: String?
+    var clearartImageUrl: NSURL?
+    var clearartImageString: String?
+    var thumbImageUrl: NSURL?
+    var thumbImageString: String?
+
     
- 
     init(dictionary: NSDictionary)
     {
         super.init()
         score = dictionary["score"] as? Double
-    
+        
         if(dictionary["type"] as? String ==  "Movie" || dictionary["movie"] != nil )
         {
             type = "Movie"
@@ -37,6 +41,7 @@ class Entertainment: NSObject {
             
             ids = (dictionary["movie"]!["ids"] as? NSDictionary)!
             
+            // poster:
             let posterString = dictionary["movie"]!["images"]!!["poster"]!!["thumb"] as? String
             
             if let posterString = posterString
@@ -49,13 +54,37 @@ class Entertainment: NSObject {
                 posterImageUrl = nil
             }
             
-                        
-
+            // clearart:
+            let clearartString = dictionary["movie"]!["images"]!!["clearart"]!!["full"] as? String
+            
+            if let clearartString = clearartString
+            {
+                clearartImageString = clearartString
+                clearartImageUrl = NSURL(string: clearartString)
+            }
+            else
+            {
+                clearartImageUrl = nil
+            }
+            
+            // thumb:
+            let thumbString = dictionary["movie"]!["images"]!!["thumb"]!!["full"] as? String
+            
+            if let thumbString = thumbString
+            {
+                thumbImageString = thumbString
+                thumbImageUrl = NSURL(string: thumbString)
+            }
+            else
+            {
+                thumbImageUrl = nil
+            }
+            
         }
         else if (dictionary["show"] != nil || type == "Show")
         {
             type = "Show"
-
+            
             title = dictionary["show"]!["title"] as? String
             
             year = dictionary["show"]!["year"] as? Int
@@ -64,6 +93,7 @@ class Entertainment: NSObject {
             
             ids = (dictionary["show"]!["ids"] as? NSDictionary)!
             
+            // poster:
             let posterString = dictionary["show"]!["images"]!!["poster"]!!["thumb"] as? String
             
             if let posterString = posterString
@@ -74,9 +104,32 @@ class Entertainment: NSObject {
             {
                 posterImageUrl = nil
             }
-
+            
+            // clearart:
+            let clearartString = dictionary["show"]!["images"]!!["clearart"]!!["full"] as? String
+            
+            if let clearartString = clearartString
+            {
+                clearartImageUrl = NSURL(string: clearartString)
+            }
+            else
+            {
+                clearartImageUrl = nil
+            }
+            
+            // thumb:
+            let thumbString = dictionary["show"]!["images"]!!["thumb"]!!["full"] as? String
+            
+            if let thumbString = thumbString
+            {
+                thumbImageUrl = NSURL(string: thumbString)
+            }
+            else
+            {
+                thumbImageUrl = nil
+            }
+            
         }
-        
         
     }
     
@@ -89,4 +142,5 @@ class Entertainment: NSObject {
         
         return entertainments
     }
+    
 }
