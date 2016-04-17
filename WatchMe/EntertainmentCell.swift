@@ -24,7 +24,11 @@ class EntertainmentCell: UITableViewCell {
             titleLabel.text = entertainment.title
             typeLabel.text = entertainment.type?.uppercaseString
             descriptionLabel.text = entertainment.content
-            yearLabel.text = "(\(entertainment.year!))"
+            if let year = entertainment.year {
+                yearLabel.text = "(\(year))"
+            } else {
+                yearLabel.text = "no year"
+            }
             if let posterImageUrl = entertainment.posterImageUrl {
                 posterImageView.setImageWithURL(posterImageUrl)
             } else {
