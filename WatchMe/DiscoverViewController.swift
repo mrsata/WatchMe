@@ -8,14 +8,18 @@
 
 import UIKit
 
-class DiscoverViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource,UITableViewDelegate {
+class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var trendingTableView: UITableView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
+    var pageControl: UIPageControl!
+    var frame: CGRect = CGRectMake(0, 0, 0, 0)
     var trending: [Entertainment]!
     var trendingMovies: [Entertainment]!
     var trendingShows:  [Entertainment]!
+    var subViews: [UIImageView]! = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +28,24 @@ class DiscoverViewController: UIViewController, UISearchBarDelegate, UITableView
         getTrendingMovies()
         getTrendingShows()
         
+        // Initiate scrollView:
+        scrollView.delegate = self
+        scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 5, scrollView.frame.size.height)
+        scrollView.showsHorizontalScrollIndicator = false
+        for index in 0..<5 {
+            frame.origin.x = self.view.frame.size.width * CGFloat(index)
+            frame.size = CGSizeMake(self.view.frame.size.width, scrollView.frame.size.height)
+            scrollView.pagingEnabled = true
+            let subView = UIImageView(frame: frame)
+            subViews.append(subView)
+            scrollView.addSubview(subViews[index])
+        }
+        configurePageControl()
+        pageControl.addTarget(self, action: #selector(DiscoverViewController.changePage(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        
+        // Initiate trendingTableView:
         trendingTableView.dataSource = self
         trendingTableView.delegate = self
-        trendingTableView.reloadData()
         
     }
     
@@ -40,6 +59,7 @@ class DiscoverViewController: UIViewController, UISearchBarDelegate, UITableView
         Client.sharedInstance.getTrendingMovies( { (data: [Entertainment]) -> () in
             self.trendingMovies = data
             self.trending = self.trendingMovies
+            self.reloadScrollViewData()
             self.trendingTableView.reloadData()
             print("succeed")
         }) { (error: NSError) -> () in
@@ -56,7 +76,41 @@ class DiscoverViewController: UIViewController, UISearchBarDelegate, UITableView
         }
     }
     
-    // Functions initiating tableView:
+    
+    // Functions supporting scrollView:
+    func configurePageControl() {
+        
+        self.pageControl = UIPageControl(frame: CGRectMake(0,scrollView.frame.origin.y + scrollView.frame.height - 25,self.view.frame.size.width, 25))
+        self.pageControl.numberOfPages = 5
+        self.pageControl.currentPage = 0
+        self.view.addSubview(pageControl)
+        
+    }
+    
+    func changePage(sender: AnyObject) -> () {
+        
+        let x = CGFloat(pageControl.currentPage) * self.view.frame.size.width
+        scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
+        let pageNumber = round(scrollView.contentOffset.x / self.view.frame.size.width)
+        pageControl.currentPage = Int(pageNumber)
+    }
+
+    func reloadScrollViewData() {
+        for index in 0..<5 {
+            if let imageUrl:NSURL = self.trending[index].thumbImageUrl{
+                self.subViews[index].setImageWithURL(imageUrl)
+            } else {
+                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
+                self.subViews[index].setImageWithURL(noImageUrl)
+            }
+        }
+    }
+    
+    // Functions supporting tableView:
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         var count:Int?
@@ -90,9 +144,15 @@ class DiscoverViewController: UIViewController, UISearchBarDelegate, UITableView
         case 0:
             trending = trendingMovies
             trendingTableView.reloadData()
+            reloadScrollViewData()
+            scrollView.setContentOffset(CGPointMake(0, 0), animated: false)
+            pageControl.currentPage = 0
         case 1:
             trending = trendingShows
             trendingTableView.reloadData()
+            reloadScrollViewData()
+            scrollView.setContentOffset(CGPointMake(0, 0), animated: false)
+            pageControl.currentPage = 0
         default:
             break;
         }
