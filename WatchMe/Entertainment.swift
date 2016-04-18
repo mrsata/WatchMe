@@ -22,7 +22,7 @@ class Entertainment: NSObject {
     var clearartImageString: String?
     var thumbImageUrl: NSURL?
     var thumbImageString: String?
-
+    var trailerString: String?
     
     init(dictionary: NSDictionary)
     {
@@ -41,6 +41,12 @@ class Entertainment: NSObject {
             
             ids = (dictionary["movie"]!["ids"] as? NSDictionary)!
             
+            if(dictionary["trailer"] != nil)
+            {
+                trailerString = dictionary["trailer"] as? String
+                print(trailerString)
+            }
+            
             // poster:
             let posterString = dictionary["movie"]!["images"]!!["poster"]!!["thumb"] as? String
             
@@ -51,11 +57,12 @@ class Entertainment: NSObject {
             }
             else
             {
-                posterImageUrl = nil
+                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
+                posterImageUrl = noImageUrl
             }
             
             // clearart:
-            let clearartString = dictionary["movie"]!["images"]!!["clearart"]!!["full"] as? String
+            let clearartString = dictionary["movie"]?["images"]??["clearart"]??["full"] as? String
             
             if let clearartString = clearartString
             {
@@ -68,7 +75,7 @@ class Entertainment: NSObject {
             }
             
             // thumb:
-            let thumbString = dictionary["movie"]!["images"]!!["thumb"]!!["full"] as? String
+            let thumbString = dictionary["movie"]?["images"]??["thumb"]??["full"] as? String
             
             if let thumbString = thumbString
             {
@@ -93,8 +100,13 @@ class Entertainment: NSObject {
             
             ids = (dictionary["show"]!["ids"] as? NSDictionary)!
             
+            if(dictionary["trailer"] != nil)
+            {
+                trailerString = dictionary["trailer"] as? String
+            }
+            
             // poster:
-            let posterString = dictionary["show"]!["images"]!!["poster"]!!["thumb"] as? String
+            let posterString = dictionary["show"]?["images"]??["poster"]??["thumb"] as? String
             
             if let posterString = posterString
             {
@@ -102,11 +114,12 @@ class Entertainment: NSObject {
             }
             else
             {
-                posterImageUrl = nil
+                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
+                posterImageUrl = noImageUrl
             }
             
             // clearart:
-            let clearartString = dictionary["show"]!["images"]!!["clearart"]!!["full"] as? String
+            let clearartString = dictionary["show"]?["images"]??["clearart"]??["full"] as? String
             
             if let clearartString = clearartString
             {
@@ -118,7 +131,7 @@ class Entertainment: NSObject {
             }
             
             // thumb:
-            let thumbString = dictionary["show"]!["images"]!!["thumb"]!!["full"] as? String
+            let thumbString = dictionary["show"]?["images"]??["thumb"]??["full"] as? String
             
             if let thumbString = thumbString
             {

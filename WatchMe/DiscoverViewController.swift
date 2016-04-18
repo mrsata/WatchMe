@@ -41,7 +41,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             scrollView.addSubview(subViews[index])
         }
         configurePageControl()
-        pageControl.addTarget(self, action: #selector(DiscoverViewController.changePage(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
         
         // Initiate trendingTableView:
         trendingTableView.dataSource = self
