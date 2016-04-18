@@ -8,17 +8,15 @@
 
 import UIKit
 import Social
+import MediaPlayer
+import AVKit
+import AVFoundation
 
 class ItemDetailViewController: UIViewController {
     
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var mainDescriptionLabel: UILabel!
-    @IBOutlet weak var showtimes1Label: UILabel!
-    @IBOutlet weak var showtimes2Label: UILabel!
-    @IBOutlet weak var showtimes3Label: UILabel!
-    @IBOutlet weak var showtimes4Label: UILabel!
-    @IBOutlet weak var showtimes5Label: UILabel!
     @IBOutlet weak var recommended1ImageView: UIImageView!
     @IBOutlet weak var recommended2ImageView: UIImageView!
     @IBOutlet weak var recommended3ImageView: UIImageView!
@@ -27,10 +25,15 @@ class ItemDetailViewController: UIViewController {
     @IBOutlet weak var recommended2TitleLabel: UILabel!
     @IBOutlet weak var recommended3TitleLabel: UILabel!
     @IBOutlet weak var recommended4TitleLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
+    
+    var trailerString: String! 
     
     var entertainment: Entertainment!
     
     var recommendations: [Recommendation]!
+    
+    var moviePlayer: MPMoviePlayerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,38 @@ class ItemDetailViewController: UIViewController {
         mainImageView.setImageWithURL(entertainment.posterImageUrl!)
         mainDescriptionLabel.text = entertainment.content
         mainDescriptionLabel.sizeToFit()
+        
+        yearLabel.text = "(\(entertainment.year!))"
+        
+        let id = entertainment.ids?.valueForKey("imdb") as? String
+        
+        Client.sharedInstance.getMovieSummary(id!, success: { (response: NSDictionary) -> () in
+            
+            if(response["trailer"] != nil)
+            {
+                self.trailerString = response["trailer"] as? String
+                print(self.trailerString)
+            
+//                let videoURL = NSURL(string: self.trailerString!)
+//                let player = AVPlayer(URL: videoURL!)
+//                let playerLayer = AVPlayerLayer(player: player)
+//                playerLayer.frame = CGRect(x: 20, y: 200, width: 280, height: 120)
+//                self.view.layer.addSublayer(playerLayer)
+//                player.play()
+                
+                
+                let webView: UIWebView = UIWebView()
+                webView.frame = CGRect(x: 20, y: 190, width: 280, height: 130)
+                webView.loadRequest(NSURLRequest(URL: NSURL(string: self.trailerString!)!))
+                self.view!.addSubview(webView)
+
+            }
+            }) { (error: NSError) -> () in
+                
+        }
+        
+
+
         
         Client.sharedInstance.getMovieRecommendation({ (response: [Recommendation]) -> () in
             //self.recommendations = response
@@ -58,16 +93,10 @@ class ItemDetailViewController: UIViewController {
         }) { (error: NSError) -> () in
             
         }
-        
-        
-        Client.sharedInstance.getNextEpisode({ () -> () in
-            
-            }) { (error: NSError) -> () in
-                
-        }
-
+       
     }
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
