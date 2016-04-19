@@ -103,7 +103,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         let entertainment = entertainments[indexPath!.row]
         
         Client.sharedInstance.addToCollection(entertainment, success: { () -> () in
-            
+            print("I got here!")
         }) { (error: NSError) -> () in
             
         }
