@@ -65,10 +65,8 @@ class ItemDetailViewController: UIViewController {
 //                player.play()
                 
                 let videoURL = NSURL(string: self.trailerString!)
-                let width = self.view.frame.width - 10
-                let height = self.view.frame.height * 0.27
                 
-                let moviePlayer = YouTubePlayerView(frame: CGRect(x: 5, y: 190, width: width, height: height))
+                let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: 190, width: 280, height: 130))
                 
                 moviePlayer.loadVideoURL(videoURL!)
                 self.view.addSubview(moviePlayer)

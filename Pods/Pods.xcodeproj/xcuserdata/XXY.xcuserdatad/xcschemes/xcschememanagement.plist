@@ -19,11 +19,6 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>YouTubePlayer.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -37,17 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>60AB326F5C22B2D55A3BFD44D1F74229</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>6494C9571053EF91A907EA516BB39FA5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F11964782C8A544D0D2D4F208AED16CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
