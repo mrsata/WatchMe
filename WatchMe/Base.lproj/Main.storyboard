@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="K0B-g7-ngU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="K0B-g7-ngU">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -379,16 +379,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKh-fU-I2K">
-                                <rect key="frame" x="176" y="530" width="114" height="30"/>
-                                <state key="normal" title="Tweet on Twitter"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKh-fU-I2K">
+                                <rect key="frame" x="176" y="529" width="132" height="31"/>
+                                <state key="normal" image="twitter"/>
                                 <connections>
                                     <action selector="twitterBtn:" destination="ZOV-5d-9A2" eventType="touchUpInside" id="XX6-ZH-1Wm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOJ-l0-Otx">
-                                <rect key="frame" x="21" y="530" width="132" height="30"/>
-                                <state key="normal" title="Share on Facebook"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOJ-l0-Otx">
+                                <rect key="frame" x="21" y="529" width="132" height="31"/>
+                                <state key="normal" image="facebook"/>
                                 <connections>
                                     <action selector="facebookBtn:" destination="ZOV-5d-9A2" eventType="touchUpInside" id="7Te-gw-ssM"/>
                                 </connections>
@@ -399,7 +399,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMt-B3-3Nq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMt-B3-3Nq">
                                 <rect key="frame" x="21" y="501" width="45" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -435,7 +435,7 @@
                             <constraint firstItem="B4N-vZ-GNe" firstAttribute="leading" secondItem="Lji-ga-jts" secondAttribute="trailing" constant="24" id="POP-Fg-EGr"/>
                             <constraint firstItem="HW8-mm-q6p" firstAttribute="top" secondItem="Lji-ga-jts" secondAttribute="bottom" constant="-3" id="PgB-af-K2g"/>
                             <constraint firstItem="7vA-Gw-Zdd" firstAttribute="top" secondItem="uYj-sw-DRU" secondAttribute="bottom" constant="-3" id="PsY-Pd-1TN"/>
-                            <constraint firstAttribute="trailing" secondItem="eKh-fU-I2K" secondAttribute="trailing" constant="30" id="QMl-oN-pIS"/>
+                            <constraint firstAttribute="trailing" secondItem="eKh-fU-I2K" secondAttribute="trailing" constant="12" id="QMl-oN-pIS"/>
                             <constraint firstItem="Lji-ga-jts" firstAttribute="leading" secondItem="fQQ-9e-NFa" secondAttribute="trailing" constant="27" id="QaD-aF-nAQ"/>
                             <constraint firstItem="Lji-ga-jts" firstAttribute="leading" secondItem="HW8-mm-q6p" secondAttribute="leading" id="T7V-KT-dDX"/>
                             <constraint firstItem="Lji-ga-jts" firstAttribute="top" secondItem="B4N-vZ-GNe" secondAttribute="top" id="UCo-Uu-cXv"/>
@@ -974,6 +974,8 @@
         <image name="Discover" width="25" height="25"/>
         <image name="Profile" width="25" height="25"/>
         <image name="Search" width="50" height="50"/>
+        <image name="facebook" width="132" height="31"/>
+        <image name="twitter" width="132" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XxL-L6-zu3"/>
