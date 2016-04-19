@@ -200,7 +200,6 @@
 				TargetAttributes = {
 					68B680B81CA21318000DC9EF = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 477CNH7T4Q;
 					};
 				};
 			};
@@ -419,6 +418,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WatchMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Grace.WatchMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,6 +434,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WatchMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Grace.WatchMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
