@@ -11,6 +11,7 @@ import Social
 import MediaPlayer
 import AVKit
 import AVFoundation
+import YouTubePlayer
 
 class ItemDetailViewController: UIViewController {
     
@@ -63,13 +64,12 @@ class ItemDetailViewController: UIViewController {
 //                self.view.layer.addSublayer(playerLayer)
 //                player.play()
                 
+                let videoURL = NSURL(string: self.trailerString!)
                 
-                let webView: UIWebView = UIWebView()
-                let width = self.view.frame.width-10
-                let height = self.view.frame.height * 0.27
-                webView.frame = CGRect(x: 5, y: 190, width: width, height: height)
-                webView.loadRequest(NSURLRequest(URL: NSURL(string: self.trailerString!)!))
-                self.view!.addSubview(webView)
+                let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: 190, width: 280, height: 130))
+                
+                moviePlayer.loadVideoURL(videoURL!)
+                self.view.addSubview(moviePlayer)
 
             }
             }) { (error: NSError) -> () in
