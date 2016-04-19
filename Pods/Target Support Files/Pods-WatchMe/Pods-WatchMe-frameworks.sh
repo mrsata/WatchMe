@@ -86,8 +86,10 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WatchMe/AFNetworking.framework"
   install_framework "Pods-WatchMe/AFOAuth2Manager.framework"
+  install_framework "Pods-WatchMe/YouTubePlayer.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WatchMe/AFNetworking.framework"
   install_framework "Pods-WatchMe/AFOAuth2Manager.framework"
+  install_framework "Pods-WatchMe/YouTubePlayer.framework"
 fi
