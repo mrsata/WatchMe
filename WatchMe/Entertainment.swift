@@ -22,7 +22,7 @@ class Entertainment: NSObject {
     var clearartImageString: String?
     var thumbImageUrl: NSURL?
     var thumbImageString: String?
-
+    var trailerString: String?
     
     init(dictionary: NSDictionary)
     {
@@ -40,6 +40,12 @@ class Entertainment: NSObject {
             content = dictionary["movie"]!["overview"] as? String
             
             ids = (dictionary["movie"]!["ids"] as? NSDictionary)!
+            
+            if(dictionary["trailer"] != nil)
+            {
+                trailerString = dictionary["trailer"] as? String
+                print(trailerString)
+            }
             
             // poster:
             let posterString = dictionary["movie"]!["images"]!!["poster"]!!["thumb"] as? String
@@ -93,6 +99,11 @@ class Entertainment: NSObject {
             content = dictionary["show"]!["overview"] as? String
             
             ids = (dictionary["show"]!["ids"] as? NSDictionary)!
+            
+            if(dictionary["trailer"] != nil)
+            {
+                trailerString = dictionary["trailer"] as? String
+            }
             
             // poster:
             let posterString = dictionary["show"]?["images"]??["poster"]??["thumb"] as? String

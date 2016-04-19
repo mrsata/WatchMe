@@ -41,7 +41,7 @@ class Client: AFOAuth2Manager {
         parameters["redirect_uri"] = "watchme://oauth"
         parameters["grant_type"] = "authorization_code"
         Client.sharedInstance.authenticateUsingOAuthWithURLString("https://api-v2launch.trakt.tv/oauth/token", parameters: parameters, success: { (token: AFOAuthCredential!) -> Void in
-            print("Was successful!")
+            //print("Was successful!")
             self.accessToken = token.accessToken
             self.loginSuccess!()
         }) { (error: NSError!) -> Void in
@@ -74,7 +74,7 @@ class Client: AFOAuth2Manager {
         }
         GET("https://api-v2launch.trakt.tv/search?type=movie,show", parameters: parameters, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
-            print("Got the search results!")
+            //print("Got the search results!")
             let userDictionary = response as! [NSDictionary]
             
             let entertainments = Entertainment.toArray(userDictionary)
@@ -134,7 +134,7 @@ class Client: AFOAuth2Manager {
         
         GET("https://api-v2launch.trakt.tv/sync/collection/movies?extended=images,full", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
-            print("Got the collection!")
+            //print("Got the collection!")
             let userDictionary = response as! [NSDictionary]
             
             success(Entertainment.toArray(userDictionary))
@@ -153,7 +153,7 @@ class Client: AFOAuth2Manager {
         
         GET("https://api-v2launch.trakt.tv/recommendations/movies?extended=images,full&limit=5", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
-            print("Got the movie recommendation!")
+            //print("Got the movie recommendation!")
             self.userMovieDictionary = response as! [NSMutableDictionary]
             
             for i in 0 ..< self.userMovieDictionary.count
@@ -175,7 +175,7 @@ class Client: AFOAuth2Manager {
         requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
         GET("https://api-v2launch.trakt.tv/users/settings", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-            print("Got the user settings!")
+            //print("Got the user settings!")
             success(User.init(dictionary: response as! NSDictionary))
             
         }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
@@ -192,7 +192,7 @@ class Client: AFOAuth2Manager {
         requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
         GET("https://api-v2launch.trakt.tv/users/\(username)/stats", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-            print("Got the stats!")
+            //print("Got the stats!")
             success(response as! NSDictionary)
         }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
             print("Did not get stats")
@@ -208,7 +208,7 @@ class Client: AFOAuth2Manager {
         
         GET("https://api-v2launch.trakt.tv/movies/trending?extended=images,full&limit=30", parameters: nil, success: {
             (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-            print("Succeed in getting trending movies")
+            //print("Succeed in getting trending movies")
             let userDictionary = response as! [NSDictionary]
             let trendingMovies = Entertainment.toArray(userDictionary)
             success(trendingMovies)
@@ -227,7 +227,7 @@ class Client: AFOAuth2Manager {
         
         GET("https://api-v2launch.trakt.tv/shows/trending?extended=images,full&limit=30", parameters: nil, success: {
             (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-            print("Succeed in getting trending shows")
+            //print("Succeed in getting trending shows")
             let userDictionary = response as! [NSDictionary]
             let trendingShows = Entertainment.toArray(userDictionary)
             success(trendingShows)
@@ -240,10 +240,28 @@ class Client: AFOAuth2Manager {
     func getNextEpisode(success: () -> (), failure: (NSError) ->()){
         
         GET("https://api-v2launch.trakt.tv/shows/game-of-thrones/progress/collection?hidden=false&specials=false", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-            print("Got the next episode!")
+            //print("Got the next episode!")
         }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
             print("Did not get the next episode")
         }
+    }
+    
+    func getMovieSummary(id: String, success: (NSDictionary) -> (), failure: (NSError) -> ()){
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        GET("https://api-v2launch.trakt.tv/movies/\(id)?extended=images,full", parameters: nil, success: {
+            (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            print("Got the summary!")
+            let userDictionary = response as! NSDictionary
+            //let summary = Entertainment.toArray(userDictionary)
+            success(userDictionary)
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Didn't get the shows")
+        }
+
     }
     
     //    func logout()
