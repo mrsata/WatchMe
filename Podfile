@@ -6,5 +6,6 @@
 target 'WatchMe' do
     pod 'AFNetworking'
     pod 'AFOAuth2Manager'
+    pod 'YouTubePlayer'
 end
 

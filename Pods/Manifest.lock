@@ -22,13 +22,16 @@ PODS:
     - AFNetworking/NSURLSession
   - AFOAuth2Manager (2.2.0):
     - AFNetworking/NSURLConnection (~> 2.2)
+  - YouTubePlayer (0.3.0)
 
 DEPENDENCIES:
   - AFNetworking
   - AFOAuth2Manager
+  - YouTubePlayer
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   AFOAuth2Manager: 952eb62e8fd8022971e64c6e8fe28b9e999224af
+  YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
 
 COCOAPODS: 0.39.0
