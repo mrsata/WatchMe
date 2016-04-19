@@ -65,7 +65,9 @@ class ItemDetailViewController: UIViewController {
                 
                 
                 let webView: UIWebView = UIWebView()
-                webView.frame = CGRect(x: 20, y: 190, width: 280, height: 130)
+                let width = self.view.frame.width-10
+                let height = self.view.frame.height * 0.27
+                webView.frame = CGRect(x: 5, y: 190, width: width, height: height)
                 webView.loadRequest(NSURLRequest(URL: NSURL(string: self.trailerString!)!))
                 self.view!.addSubview(webView)
 

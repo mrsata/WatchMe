@@ -136,7 +136,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         return cell
         
     }
-    
+
     // Functions for segementedControll
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex
