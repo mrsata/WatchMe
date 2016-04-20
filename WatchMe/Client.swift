@@ -222,7 +222,7 @@ class Client: AFOAuth2Manager {
     }
 
     
-    func getSettings(success: (User) -> (), failure: (NSError) -> ()){
+    func getSettings(username: String, success: (NSDictionary) -> (), failure: (NSError) -> ()){
         
         requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
         requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
@@ -231,7 +231,7 @@ class Client: AFOAuth2Manager {
         
         GET("https://api-v2launch.trakt.tv/users/settings", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             //print("Got the user settings!")
-            success(User.init(dictionary: response as! NSDictionary))
+            success(response as! NSDictionary)
             
         }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
             print("Did not get user settings")

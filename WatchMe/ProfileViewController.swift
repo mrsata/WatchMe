@@ -24,9 +24,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        Client.sharedInstance.getSettings({ (info: User) -> () in
-            self.user = info
-            self.username.text = self.user.name
+        Client.sharedInstance.getSettings("IodineXXY", success: { (response: NSDictionary) -> () in
+     
             }) { (error: NSError) -> () in
             
         }
@@ -46,6 +45,8 @@ class ProfileViewController: UIViewController {
             }) { (error: NSError) -> () in
            
         }
+        
+        
     
     }
     
