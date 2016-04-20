@@ -15,12 +15,12 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     @IBOutlet weak var scrollView: UIScrollView!
     
     var pageControl: UIPageControl!
-    var currentPage: Int = 1
     var frame: CGRect = CGRectMake(0, 0, 0, 0)
     var trending: [Entertainment]!
     var trendingMovies: [Entertainment]!
     var trendingShows:  [Entertainment]!
     var subViews: [UIImageView]! = []
+    var topIndexs: [Int]! = [0,1,2,3,4]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         scrollView.delegate = self
         scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 7, scrollView.frame.size.height)
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.bounces = false
         for index in 0..<7 {
             frame.origin.x = self.view.frame.size.width * CGFloat(index)
             frame.size = CGSizeMake(self.view.frame.size.width, scrollView.frame.size.height)
@@ -108,23 +109,45 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     }
 
     func reloadScrollViewData() {
+        
         for index in 0..<5 {
-            if let imageUrl:NSURL = self.trending[index].thumbImageUrl{
-                self.subViews[index+1].setImageWithURL(imageUrl)
-                if(index==0){
-                    self.subViews[6].setImageWithURL(imageUrl)
-                } else if(index==4){
-                    self.subViews[0].setImageWithURL(imageUrl)
-                }
+            var i:Int
+            if(index==0){
+                i = topIndexs[index]
             } else {
-                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
-                self.subViews[index+1].setImageWithURL(noImageUrl)
-                if(index==0){
-                    self.subViews[5].setImageWithURL(noImageUrl)
-                } else if(index==4){
-                    self.subViews[5].setImageWithURL(noImageUrl)
-                }
+                i = topIndexs[index-1] + 1
             }
+            while(self.trending[i].thumbImageUrl == nil){
+                i += 1
+            }
+            topIndexs[index] = i
+            let imageUrl:NSURL = self.trending[i].thumbImageUrl!
+            self.subViews[index + 1].setImageWithURL(imageUrl)
+            if(index==0){
+                self.subViews[6].setImageWithURL(imageUrl)
+            } else if(index==4){
+                self.subViews[0].setImageWithURL(imageUrl)
+            }
+//            if let imageUrl:NSURL = self.trending[index].thumbImageUrl{
+//                self.subViews[index+1].setImageWithURL(imageUrl)
+//                if(index==0){
+//                    self.subViews[6].setImageWithURL(imageUrl)
+//                } else if(index==4){
+//                    self.subViews[0].setImageWithURL(imageUrl)
+//                }
+//            } else {
+//                var imageUrl: NSURL
+//                while(self.trending[index+i].thumbImageUrl == nil){
+//                    
+//                }
+//                
+//                self.subViews[index+1].setImageWithURL(noImageUrl)
+//                if(index==0){
+//                    self.subViews[5].setImageWithURL(noImageUrl)
+//                } else if(index==4){
+//                    self.subViews[5].setImageWithURL(noImageUrl)
+//                }
+//            }
         }
     }
     
@@ -193,6 +216,17 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             
             detailViewController.entertainment = trendingEntertainment
         }
+        
+        if let scrollView = sender as? UIScrollView{
+            
+            let index = topIndexs[pageControl.currentPage]
+            let trendingEntertainment = trending[index]
+            
+            let detailViewController = segue.destinationViewController as! ItemDetailViewController
+            
+            detailViewController.entertainment = trendingEntertainment
+        }
+        
     }
     
     
