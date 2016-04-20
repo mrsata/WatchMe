@@ -232,7 +232,7 @@ class Client: AFOAuth2Manager {
         GET("https://api-v2launch.trakt.tv/users/settings", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             //print("Got the user settings!")
             success(response as! NSDictionary)
-            
+            //print(response)
         }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
             print("Did not get user settings")
         }
