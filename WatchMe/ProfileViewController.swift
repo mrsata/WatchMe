@@ -52,6 +52,11 @@ class ProfileViewController: UIViewController {
     
     @IBAction func onLogout(sender: AnyObject) {
         
+        Client.sharedInstance.logout({ () -> () in
+            self.performSegueWithIdentifier("logoutSegue", sender: sender)
+            }) { (error: NSError) -> () in
+                
+        }
     }
 
     override func didReceiveMemoryWarning() {
