@@ -30,10 +30,12 @@ class ProfileViewController: UIViewController {
         Client.sharedInstance.getSettings("IodineXXY", success: { (response: NSDictionary) -> () in
             // Time format
             var formatter = NSDateFormatter()
-            formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-            let createdAtString = response["joined_at"] as ! String
-            self.createdAt = formatter.dateFromString(createdAtString)
-            print(self.createdAt)
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"
+            print(response["user"]!["joined_at"])
+            
+            let createdAtString = response["user"]!["joined_at"] as? String
+            self.createdAt = formatter.dateFromString(createdAtString!)
+            //print(self.createdAt)
             
             let calendar = NSCalendar.currentCalendar()
             let comp = calendar.components([.Hour, .Minute, .Month, .Day, .Year], fromDate: self.createdAt!)
