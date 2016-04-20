@@ -46,12 +46,12 @@ class ProfileViewController: UIViewController {
             }) { (error: NSError) -> () in
            
         }
-
-        
-        
-        
-        
     
+    }
+    
+    
+    @IBAction func onLogout(sender: AnyObject) {
+        
     }
 
     override func didReceiveMemoryWarning() {
