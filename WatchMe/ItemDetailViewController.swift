@@ -41,6 +41,12 @@ class ItemDetailViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
+        let frame = self.view.frame
+        let backgroundImageView = UIImageView(frame: frame)
+        backgroundImageView.setImageWithURL(entertainment.posterImageUrl!)
+        backgroundImageView.alpha = 0.2
+        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        
         mainTitleLabel.text = entertainment.title
         mainImageView.setImageWithURL(entertainment.posterImageUrl!)
         mainDescriptionLabel.text = entertainment.content
@@ -51,13 +57,19 @@ class ItemDetailViewController: UIViewController {
         let id = entertainment.ids?.valueForKey("imdb") as? String
         
         
+//        if let backgroundImage:UIImage = mainImageView.image{
+//            self.view.backgroundColor = UIColor(patternImage: backgroundImage).colorWithAlphaComponent(0.2)
+//        } else {
+//            print("nil")
+//        }
+        
         if(entertainment.type == "Movie")
         {
             Client.sharedInstance.getMovieSummary(id!, success: { (response: NSDictionary) -> () in
                 
-                if(response["trailer"] != nil)
+                if let trailerStr = response["trailer"] as? String
                 {
-                    self.trailerString = response["trailer"] as? String
+                    self.trailerString = trailerStr
                     print(self.trailerString)
                     
                     //                let videoURL = NSURL(string: self.trailerString!)
