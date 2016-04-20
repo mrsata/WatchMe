@@ -15,6 +15,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     @IBOutlet weak var scrollView: UIScrollView!
     
     var pageControl: UIPageControl!
+    var currentPage: Int = 1
     var frame: CGRect = CGRectMake(0, 0, 0, 0)
     var trending: [Entertainment]!
     var trendingMovies: [Entertainment]!
@@ -30,9 +31,9 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         
         // Initiate scrollView:
         scrollView.delegate = self
-        scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 5, scrollView.frame.size.height)
+        scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 7, scrollView.frame.size.height)
         scrollView.showsHorizontalScrollIndicator = false
-        for index in 0..<5 {
+        for index in 0..<7 {
             frame.origin.x = self.view.frame.size.width * CGFloat(index)
             frame.size = CGSizeMake(self.view.frame.size.width, scrollView.frame.size.height)
             scrollView.pagingEnabled = true
@@ -60,6 +61,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             self.trendingMovies = data
             self.trending = self.trendingMovies
             self.reloadScrollViewData()
+            self.scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: true)
             self.trendingTableView.reloadData()
             print("succeed")
         }) { (error: NSError) -> () in
@@ -79,33 +81,49 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     
     // Functions supporting scrollView:
     func configurePageControl() {
-        
         self.pageControl = UIPageControl(frame: CGRectMake(0,scrollView.frame.origin.y + scrollView.frame.height - 25,self.view.frame.size.width, 25))
         self.pageControl.numberOfPages = 5
         self.pageControl.currentPage = 0
         self.view.addSubview(pageControl)
-        
     }
     
     func changePage(sender: AnyObject) -> () {
-        
         let x = CGFloat(pageControl.currentPage) * self.view.frame.size.width
         scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        
-        let pageNumber = round(scrollView.contentOffset.x / self.view.frame.size.width)
-        pageControl.currentPage = Int(pageNumber)
+        if let scrollView = self.scrollView{
+            var pageNumber = Int(round(scrollView.contentOffset.x / self.view.frame.size.width)) - 1
+            if(pageControl.currentPage == 4 && pageNumber == 5){
+                pageNumber = 0
+                scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
+            } else if(pageControl.currentPage == 0 && pageNumber == -1){
+                pageNumber = 4
+                scrollView.setContentOffset(CGPointMake(self.view.frame.size.width * 5, 0), animated: false)
+            }
+            print(pageControl.currentPage)
+            pageControl.currentPage = Int(pageNumber)
+        }
     }
 
     func reloadScrollViewData() {
         for index in 0..<5 {
             if let imageUrl:NSURL = self.trending[index].thumbImageUrl{
-                self.subViews[index].setImageWithURL(imageUrl)
+                self.subViews[index+1].setImageWithURL(imageUrl)
+                if(index==0){
+                    self.subViews[6].setImageWithURL(imageUrl)
+                } else if(index==4){
+                    self.subViews[0].setImageWithURL(imageUrl)
+                }
             } else {
                 let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
-                self.subViews[index].setImageWithURL(noImageUrl)
+                self.subViews[index+1].setImageWithURL(noImageUrl)
+                if(index==0){
+                    self.subViews[5].setImageWithURL(noImageUrl)
+                } else if(index==4){
+                    self.subViews[5].setImageWithURL(noImageUrl)
+                }
             }
         }
     }
@@ -145,13 +163,13 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             trending = trendingMovies
             trendingTableView.reloadData()
             reloadScrollViewData()
-            scrollView.setContentOffset(CGPointMake(0, 0), animated: false)
+            scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
             pageControl.currentPage = 0
         case 1:
             trending = trendingShows
             trendingTableView.reloadData()
             reloadScrollViewData()
-            scrollView.setContentOffset(CGPointMake(0, 0), animated: false)
+            scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
             pageControl.currentPage = 0
         default:
             break;
