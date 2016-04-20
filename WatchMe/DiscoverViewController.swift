@@ -42,12 +42,14 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             subViews.append(subView)
             scrollView.addSubview(subViews[index])
         }
+        
         configurePageControl()
         pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
         
         // Initiate trendingTableView:
         trendingTableView.dataSource = self
         trendingTableView.delegate = self
+        view.bringSubviewToFront(trendingTableView)
         
     }
     
@@ -103,7 +105,6 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
                 pageNumber = 4
                 scrollView.setContentOffset(CGPointMake(self.view.frame.size.width * 5, 0), animated: false)
             }
-            print(pageControl.currentPage)
             pageControl.currentPage = Int(pageNumber)
         }
     }
@@ -128,26 +129,6 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             } else if(index==4){
                 self.subViews[0].setImageWithURL(imageUrl)
             }
-//            if let imageUrl:NSURL = self.trending[index].thumbImageUrl{
-//                self.subViews[index+1].setImageWithURL(imageUrl)
-//                if(index==0){
-//                    self.subViews[6].setImageWithURL(imageUrl)
-//                } else if(index==4){
-//                    self.subViews[0].setImageWithURL(imageUrl)
-//                }
-//            } else {
-//                var imageUrl: NSURL
-//                while(self.trending[index+i].thumbImageUrl == nil){
-//                    
-//                }
-//                
-//                self.subViews[index+1].setImageWithURL(noImageUrl)
-//                if(index==0){
-//                    self.subViews[5].setImageWithURL(noImageUrl)
-//                } else if(index==4){
-//                    self.subViews[5].setImageWithURL(noImageUrl)
-//                }
-//            }
         }
     }
     
@@ -217,7 +198,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             detailViewController.entertainment = trendingEntertainment
         }
         
-        if let scrollView = sender as? UIScrollView{
+        if let gesture = sender as? UITapGestureRecognizer{
             
             let index = topIndexs[pageControl.currentPage]
             let trendingEntertainment = trending[index]
