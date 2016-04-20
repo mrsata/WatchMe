@@ -279,7 +279,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onLogout:" destination="gea-tc-55h" eventType="touchUpInside" id="V3b-Xb-9cQ"/>
-                                    <segue destination="9FB-Dh-dht" kind="push" identifier="logoutSegue" id="1k1-U4-bAL"/>
+                                    <segue destination="K0B-g7-ngU" kind="modal" identifier="logoutSegue" id="idr-ht-HH3"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -978,8 +978,7 @@
         <image name="twitter" width="132" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XxL-L6-zu3"/>
-        <segue reference="1k1-U4-bAL"/>
-        <segue reference="yNA-BH-QvG"/>
+        <segue reference="ZKM-Nd-ore"/>
+        <segue reference="N4W-Dh-w6H"/>
     </inferredMetricsTieBreakers>
 </document>

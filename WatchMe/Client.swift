@@ -18,7 +18,8 @@ class Client: AFOAuth2Manager {
     var accessToken: String!
     
     var userMovieDictionary: [NSMutableDictionary] = []
-    
+    var userShowDictionary: [NSMutableDictionary] = []
+
     
     class var sharedInstance: Client {
         struct Static{
@@ -47,6 +48,8 @@ class Client: AFOAuth2Manager {
         }) { (error: NSError!) -> Void in
             print("Was not successful!")
             self.loginFailure!(error)
+            print(error)
+            
         }
         
     }
@@ -59,16 +62,29 @@ class Client: AFOAuth2Manager {
     
     func logout(success: ()->(), failure: (NSError) -> ())
     {
-        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
-        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
-        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        let url = NSURL(string: "https://api-v2launch.trakt.tv/oauth/revoke")!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("2", forHTTPHeaderField: "trakt-api-version")
+        request.addValue("\(clientKey)", forHTTPHeaderField: "trakt-api-key")
         
-        POST("https://api-v2launch.trakt.tv/oauth/revoke", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-            print("Successfully logged out")
-            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
-                print("did not log out")
+        request.HTTPBody = "{\n  \"access_token\": \"\(accessToken)\"\n}".dataUsingEncoding(NSUTF8StringEncoding);
+        
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if let response = response, data = data {
+                //print(response)
+                self.accessToken = nil
+                //print(String(data: data, encoding: NSUTF8StringEncoding))
+            } else {
+                print(error)
+            }
         }
+        
+        task.resume()
     }
     
     func search(query: String?, type: String?, year: Int?,success: ([Entertainment]) -> (), failure: (NSError) -> ()){
@@ -100,21 +116,43 @@ class Client: AFOAuth2Manager {
     
     func addToCollection(entertainment: Entertainment,success: () -> (), failure: (NSError) -> ()){
         
-                requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
-                requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
-                requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+//                requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//                requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+//                requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+//                requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+//        
+//                let json: [String: AnyObject] = ["movies":["title": entertainment.title!,"year":entertainment.year!,"ids":entertainment.ids!]]
+//                //let jsonData = NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
+//                if(entertainment.type == "movie")
+//                {
+//                    POST("https://api-v2launch.trakt.tv/sync/collection", parameters: json, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+//                        print("Successfully added to collection")
+//                        }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+//                            print("Did not add to collection")
+//                    })
+//                }
         
-                let json: [String: AnyObject] = ["movies":["title": entertainment.title!,"year":entertainment.year!,"ids":entertainment.ids!]]
-                //let jsonData = NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-                if(entertainment.type == "movie")
-                {
-                    POST("https://api-v2launch.trakt.tv/sync/collection", parameters: json, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-                        print("Successfully added to collection")
-                        }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
-                            print("Did not add to collection")
-                    })
-                }
+        let url = NSURL(string: "https://api-v2launch.trakt.tv/sync/collection")!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("2", forHTTPHeaderField: "trakt-api-version")
+        request.addValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        
+        request.HTTPBody = "{\n\"movies\": [\n {\n \"collected_at\": \"2014-09-01T09:10:11.000Z\",\n \"title\": \"\(entertainment.title)\",\n \"year\": \(entertainment.year),\n \"ids\": {\n \"trakt\": 1,\n \"slug\": \"\(entertainment.ids?.valueForKey("slug"))\",\n\"imdb\": \"\(entertainment.ids?.valueForKey("imdb"))\",\n \"tmdb\": \(entertainment.ids?.valueForKey("tmdb"))\n }\n }\n ]\n}".dataUsingEncoding(NSUTF8StringEncoding);
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if let response = response, data = data {
+                print(response)
+                print(String(data: data, encoding: NSUTF8StringEncoding))
+            } else {
+                print(error)
+            }
+        }
+        
+        task.resume()
 
     }
     
@@ -137,16 +175,16 @@ class Client: AFOAuth2Manager {
         
     }
     
-    func getMovieRecommendation(success: ([Recommendation]) -> (), failure: (NSError) -> ()){
+    func getMovieRecommendation(id: String,success: ([Recommendation]) -> (), failure: (NSError) -> ()){
         
         requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
         requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
         requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
         requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
-        GET("https://api-v2launch.trakt.tv/recommendations/movies?extended=images,full&limit=5", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+        GET("https://api-v2launch.trakt.tv/movies/\(id)/related?extended=images,full&limit=5", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
-            //print("Got the movie recommendation!")
+            print("Got the related movies!")
             self.userMovieDictionary = response as! [NSMutableDictionary]
             
             for i in 0 ..< self.userMovieDictionary.count
@@ -156,9 +194,33 @@ class Client: AFOAuth2Manager {
             }
             success(Recommendation.toArray(self.userMovieDictionary))
         }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
-            print("Did not get the search results")
+            print("Did not get the related movies")
         }
     }
+    
+    func getShowRecommendation(id: String,success: ([Recommendation]) -> (), failure: (NSError) -> ()){
+        
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        GET("https://api-v2launch.trakt.tv/shows/\(id)/related?extended=images,full&limit=5", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            
+            print("Got the related shows!")
+            self.userShowDictionary = response as! [NSMutableDictionary]
+            
+            for i in 0 ..< self.userMovieDictionary.count
+            {
+                self.userShowDictionary[i] = self.userShowDictionary[i].mutableCopy() as! NSMutableDictionary
+                self.userShowDictionary[i].setValue("Show", forKey: "type")
+            }
+            success(Recommendation.toArray(self.userShowDictionary))
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Did not get the related movies")
+        }
+    }
+
     
     func getSettings(success: (User) -> (), failure: (NSError) -> ()){
         
@@ -247,44 +309,35 @@ class Client: AFOAuth2Manager {
         
         GET("https://api-v2launch.trakt.tv/movies/\(id)?extended=images,full", parameters: nil, success: {
             (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
-            print("Got the summary!")
+            print("Got the movie summary!")
             let userDictionary = response as! NSDictionary
             //let summary = Entertainment.toArray(userDictionary)
             success(userDictionary)
             }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
-                print("Didn't get the shows")
+                print("Didn't get the movie summary")
         }
 
     }
     
-    //    func logout()
-    //    {
-    //        User.currentUser = nil
-    //        deauthorize()
-    //
-    //        NSNotificationCenter.defaultCenter().postNotificationName(User.userDidLogoutNotification, object: nil)
-    //    }
-    //
-    //    func handleOpenUrl(url: NSURL)
-    //    {
-    //        let requestToken = BDBOAuth1Credential(queryString: url.query)
-    //
-    //        fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential!) -> Void in
-    //            print("Received access token!")
-    //
-    //            self.currentAccount({ (user: User) -> () in
-    //                User.currentUser = user
-    //                self.loginSuccess?()
-    //                }, failure: { (error: NSError) -> () in
-    //                    self.loginFailure?(error)
-    //            })
-    //
-    //            }) { (error: NSError!) -> Void in
-    //                print("Failed to receive access token")
-    //                self.loginFailure?(error)
-    //        }
-    //
-    //    }
-    
+    func getShowSummary(id: String, success: (NSDictionary) -> (), failure: (NSError) -> ()){
+        requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestSerializer.setValue("2", forHTTPHeaderField: "trakt-api-version")
+        requestSerializer.setValue(clientKey, forHTTPHeaderField: "trakt-api-key")
+        requestSerializer.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        GET("https://api-v2launch.trakt.tv/shows/\(id)?extended=images,full", parameters: nil, success: {
+            (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            print("Got the show summary!")
+            let userDictionary = response as! NSDictionary
+            //let summary = Entertainment.toArray(userDictionary)
+            success(userDictionary)
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("Didn't get the show summary")
+        }
+        
+    }
+
+ 
+   
 }
 

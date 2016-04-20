@@ -50,54 +50,106 @@ class ItemDetailViewController: UIViewController {
         
         let id = entertainment.ids?.valueForKey("imdb") as? String
         
-        Client.sharedInstance.getMovieSummary(id!, success: { (response: NSDictionary) -> () in
-            
-            if(response["trailer"] != nil)
-            {
-                self.trailerString = response["trailer"] as? String
-                print(self.trailerString)
-            
-//                let videoURL = NSURL(string: self.trailerString!)
-//                let player = AVPlayer(URL: videoURL!)
-//                let playerLayer = AVPlayerLayer(player: player)
-//                playerLayer.frame = CGRect(x: 20, y: 200, width: 280, height: 120)
-//                self.view.layer.addSublayer(playerLayer)
-//                player.play()
+        
+        if(entertainment.type == "Movie")
+        {
+            Client.sharedInstance.getMovieSummary(id!, success: { (response: NSDictionary) -> () in
                 
-                let videoURL = NSURL(string: self.trailerString!)
-                
-                let w = self.view.frame.width - 20
-                let h = self.view.frame.height * 0.27
-                let moviePlayer = YouTubePlayerView(frame: CGRect(x: 10, y: 190, width: w, height: h))
-                
-                moviePlayer.loadVideoURL(videoURL!)
-                self.view.addSubview(moviePlayer)
-
+                if(response["trailer"] != nil)
+                {
+                    self.trailerString = response["trailer"] as? String
+                    print(self.trailerString)
+                    
+                    //                let videoURL = NSURL(string: self.trailerString!)
+                    //                let player = AVPlayer(URL: videoURL!)
+                    //                let playerLayer = AVPlayerLayer(player: player)
+                    //                playerLayer.frame = CGRect(x: 20, y: 200, width: 280, height: 120)
+                    //                self.view.layer.addSublayer(playerLayer)
+                    //                player.play()
+                    
+                    let videoURL = NSURL(string: self.trailerString!)
+                    
+                    let w = self.view.frame.width - 20
+                    let h = self.view.frame.height * 0.27
+                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 10, y: 190, width: w, height: h))
+                    
+                    moviePlayer.loadVideoURL(videoURL!)
+                    self.view.addSubview(moviePlayer)
+                    
+                }
+                }) { (error: NSError) -> () in
+                    
             }
-            }) { (error: NSError) -> () in
+            
+            Client.sharedInstance.getMovieRecommendation(id!, success: { (response: [Recommendation]) -> () in
+                //self.recommendations = response
                 
+                self.recommended1ImageView.setImageWithURL(response[0].posterImageUrl!)
+                self.recommended2ImageView.setImageWithURL(response[1].posterImageUrl!)
+                self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
+                self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
+                
+                self.recommended1TitleLabel.text = response[0].title
+                self.recommended2TitleLabel.text = response[1].title
+                self.recommended3TitleLabel.text = response[2].title
+                self.recommended4TitleLabel.text = response[3].title
+                
+                }) { (error: NSError) -> () in
+                    
+            }
+
         }
-        
+        else if (entertainment.type == "Show")
+        {
+            Client.sharedInstance.getShowSummary(id!, success: { (response: NSDictionary) -> () in
+                
+                if(response["trailer"] != nil)
+                {
+                    self.trailerString = response["trailer"] as? String
+                    print(self.trailerString)
+                    
+                    //                let videoURL = NSURL(string: self.trailerString!)
+                    //                let player = AVPlayer(URL: videoURL!)
+                    //                let playerLayer = AVPlayerLayer(player: player)
+                    //                playerLayer.frame = CGRect(x: 20, y: 200, width: 280, height: 120)
+                    //                self.view.layer.addSublayer(playerLayer)
+                    //                player.play()
+                    
+                    let videoURL = NSURL(string: self.trailerString!)
+                    
+                    let w = self.view.frame.width - 20
+                    let h = self.view.frame.height * 0.27
+                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 10, y: 190, width: w, height: h))
+                    
+                    moviePlayer.loadVideoURL(videoURL!)
+                    self.view.addSubview(moviePlayer)
+                    
+                }
+                }) { (error: NSError) -> () in
+                    
+            }
+            
+            Client.sharedInstance.getShowRecommendation(id!, success: { (response: [Recommendation]) -> () in
+                //self.recommendations = response
+                
+                self.recommended1ImageView.setImageWithURL(response[0].posterImageUrl!)
+                self.recommended2ImageView.setImageWithURL(response[1].posterImageUrl!)
+                self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
+                self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
+                
+                self.recommended1TitleLabel.text = response[0].title
+                self.recommended2TitleLabel.text = response[1].title
+                self.recommended3TitleLabel.text = response[2].title
+                self.recommended4TitleLabel.text = response[3].title
+                
+                }) { (error: NSError) -> () in
+                    
+            }
 
 
-        
-        Client.sharedInstance.getMovieRecommendation({ (response: [Recommendation]) -> () in
-            //self.recommendations = response
-            
-            self.recommended1ImageView.setImageWithURL(response[0].posterImageUrl!)
-            self.recommended2ImageView.setImageWithURL(response[1].posterImageUrl!)
-            self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
-            self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
-            
-            self.recommended1TitleLabel.text = response[0].title
-            self.recommended2TitleLabel.text = response[1].title
-            self.recommended3TitleLabel.text = response[2].title
-            self.recommended4TitleLabel.text = response[3].title
-            
-        }) { (error: NSError) -> () in
-            
         }
        
+        
     }
     
 
