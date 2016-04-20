@@ -14,18 +14,32 @@ class ProfileViewController: UIViewController {
     
     var user: User!
     
-    
+    var createdAt: NSDate?
 
     @IBOutlet weak var username: UILabel!
     
     @IBOutlet weak var numCollected: UILabel!
+    
+    @IBOutlet weak var joinTime: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         Client.sharedInstance.getSettings("IodineXXY", success: { (response: NSDictionary) -> () in
-     
+            // Time format
+            var formatter = NSDateFormatter()
+            formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+            let createdAtString = response["joined_at"] as ! String
+            self.createdAt = formatter.dateFromString(createdAtString)
+            print(self.createdAt)
+            
+            let calendar = NSCalendar.currentCalendar()
+            let comp = calendar.components([.Hour, .Minute, .Month, .Day, .Year], fromDate: self.createdAt!)
+            
+            self.joinTime.text = "\(comp.month)/\(comp.day)/\(comp.year)"
+            
             }) { (error: NSError) -> () in
             
         }
