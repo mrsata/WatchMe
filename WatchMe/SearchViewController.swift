@@ -19,6 +19,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         // Do any additional setup after loading the view.
         
+        let backgroundImageViewFrame = self.view.frame
+        let backgroundImageView = UIImageView(frame: backgroundImageViewFrame)
+        backgroundImageView.image = UIImage(named: "BG")
+        backgroundImageView.alpha = 0.4
+        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        
         // Initialize searchBar:
         searchBar.delegate = self
         searchBar.placeholder = "Discover something new"
@@ -27,7 +33,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         searchTableView.dataSource = self
         searchTableView.delegate = self
         searchTableView.hidden = true
-        
+        searchTableView.backgroundColor = UIColor.clearColor()
         
     }
     
@@ -83,6 +89,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCellWithIdentifier("entertainmentCell", forIndexPath: indexPath) as! EntertainmentCell
         
         cell.entertainment = entertainments[indexPath.row]
+        cell.backgroundColor = UIColor.clearColor()
         
         return cell
         

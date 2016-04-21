@@ -46,14 +46,14 @@ class ItemDetailViewController: UIViewController {
         let frame = self.view.frame
         let backgroundImageView = UIImageView(frame: frame)
         backgroundImageView.setImageWithURL(entertainment.posterImageUrl!)
-        backgroundImageView.alpha = 0.2
+        backgroundImageView.alpha = 0.4
         self.view.insertSubview(backgroundImageView, atIndex: 0)
 
         mainTitleLabel.text = entertainment.title
         mainDescriptionLabel.text = entertainment.content
         mainDescriptionLabel.sizeToFit()
         
-        yearLabel.text = "(\(entertainment.year!))"
+        yearLabel.text = "\(entertainment.year!)"
         
         let id = entertainment.ids?.valueForKey("imdb") as? String
         

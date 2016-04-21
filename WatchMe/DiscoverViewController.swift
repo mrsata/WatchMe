@@ -29,7 +29,8 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         let backgroundImageViewFrame = self.view.frame
         let backgroundImageView = UIImageView(frame: backgroundImageViewFrame)
-        backgroundImageView.image = UIImage(contentsOfFile: "signin")
+        backgroundImageView.image = UIImage(named: "BG")
+        backgroundImageView.alpha = 0.4
         self.view.insertSubview(backgroundImageView, atIndex: 0)
         getTrendingMovies()
         getTrendingShows()
@@ -61,6 +62,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         trendingTableView.tableHeaderView = headerView
         headerView.addSubview(scrollView)
         trendingTableView.bounces = false
+        trendingTableView.backgroundColor = UIColor.clearColor()
         
         // Initiate pageControl:
         configurePageControl()
@@ -173,6 +175,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCellWithIdentifier("TrendingCell", forIndexPath: indexPath) as! TrendingCell
         
         cell.trending = trending[indexPath.row]
+        cell.backgroundColor = UIColor.clearColor()
         
         return cell
         
