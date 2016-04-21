@@ -60,6 +60,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         trendingTableView.sectionHeaderHeight = scrollView.frame.height
         trendingTableView.tableHeaderView = headerView
         headerView.addSubview(scrollView)
+        trendingTableView.bounces = false
         
         // Initiate pageControl:
         configurePageControl()
@@ -98,7 +99,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     
     // Functions supporting scrollView:
     func configurePageControl() {
-        pageControl = UIPageControl(frame: CGRectMake(0, scrollView.frame.height - 25, frame.width, 25))
+        pageControl = UIPageControl(frame: CGRectMake(0, headerView.frame.height - 25, headerView.frame.width, 25))
         pageControl.numberOfPages = 5
         pageControl.currentPage = 0
         headerView.addSubview(pageControl)
@@ -184,12 +185,14 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         case 0:
             trending = trendingMovies
             trendingTableView.reloadData()
+            trendingTableView.setContentOffset(CGPointMake(0,0), animated: true)
             reloadScrollViewData()
             scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
             pageControl.currentPage = 0
         case 1:
             trending = trendingShows
             trendingTableView.reloadData()
+            trendingTableView.setContentOffset(CGPointMake(0,0), animated: true)
             reloadScrollViewData()
             scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
             pageControl.currentPage = 0

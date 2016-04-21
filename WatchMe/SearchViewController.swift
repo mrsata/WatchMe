@@ -24,7 +24,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         searchBar.placeholder = "Discover something new"
         searchBar.sizeToFit()
         self.navigationItem.titleView = searchBar
-        
         searchTableView.dataSource = self
         searchTableView.delegate = self
         searchTableView.hidden = true
@@ -51,10 +50,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }) { (error: NSError) -> () in
             print(error)
         }
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -116,14 +111,24 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
     }
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if let cell = sender as? UITableViewCell{
+            
+            let indexPath = searchTableView.indexPathForCell(cell)
+            let trendingEntertainment = entertainments[indexPath!.row]
+            
+            let detailViewController = segue.destinationViewController as! ItemDetailViewController
+            
+            detailViewController.entertainment = trendingEntertainment
+        }
+        
+    }
     
 }

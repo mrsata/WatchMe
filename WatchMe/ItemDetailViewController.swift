@@ -15,7 +15,6 @@ import YouTubePlayer
 
 class ItemDetailViewController: UIViewController {
     
-    @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var mainDescriptionLabel: UILabel!
     @IBOutlet weak var recommended1ImageView: UIImageView!
@@ -27,15 +26,18 @@ class ItemDetailViewController: UIViewController {
     @IBOutlet weak var recommended3TitleLabel: UILabel!
     @IBOutlet weak var recommended4TitleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var phantomBtn: UIButton!
     
-    var trailerString: String! 
-    
+    var trailerString: String!
     var entertainment: Entertainment!
-    
-    var recommendations: [Recommendation]!
-    
+    var recommendations: [Entertainment]!
     var moviePlayer: MPMoviePlayerController!
     
+    var gesture1: UITapGestureRecognizer!
+    var gesture2: UITapGestureRecognizer!
+    var gesture3: UITapGestureRecognizer!
+    var gesture4: UITapGestureRecognizer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,7 +50,6 @@ class ItemDetailViewController: UIViewController {
         self.view.insertSubview(backgroundImageView, atIndex: 0)
 
         mainTitleLabel.text = entertainment.title
-        mainImageView.setImageWithURL(entertainment.posterImageUrl!)
         mainDescriptionLabel.text = entertainment.content
         mainDescriptionLabel.sizeToFit()
         
@@ -56,12 +57,15 @@ class ItemDetailViewController: UIViewController {
         
         let id = entertainment.ids?.valueForKey("imdb") as? String
         
-        
-//        if let backgroundImage:UIImage = mainImageView.image{
-//            self.view.backgroundColor = UIColor(patternImage: backgroundImage).colorWithAlphaComponent(0.2)
-//        } else {
-//            print("nil")
-//        }
+        gesture1 = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
+        gesture2 = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
+        gesture3 = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
+        gesture4 = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
+        recommended1ImageView.addGestureRecognizer(self.gesture1)
+        recommended2ImageView.addGestureRecognizer(self.gesture2)
+        recommended3ImageView.addGestureRecognizer(self.gesture3)
+        recommended4ImageView.addGestureRecognizer(self.gesture4)
+        phantomBtn.hidden = true
         
         if(entertainment.type == "Movie")
         {
@@ -81,9 +85,9 @@ class ItemDetailViewController: UIViewController {
                     
                     let videoURL = NSURL(string: self.trailerString!)
                     
-                    let w = self.view.frame.width - 20
+                    let w = self.view.frame.width - 40
                     let h = self.view.frame.height * 0.27
-                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 10, y: 190, width: w, height: h))
+                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY + 30, width: w, height: h))
                     
                     moviePlayer.loadVideoURL(videoURL!)
                     self.view.addSubview(moviePlayer)
@@ -129,9 +133,9 @@ class ItemDetailViewController: UIViewController {
                     
                     let videoURL = NSURL(string: self.trailerString!)
                     
-                    let w = self.view.frame.width - 20
+                    let w = self.view.frame.width - 40
                     let h = self.view.frame.height * 0.27
-                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 10, y: 190, width: w, height: h))
+                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY + 30, width: w, height: h))
                     
                     moviePlayer.loadVideoURL(videoURL!)
                     self.view.addSubview(moviePlayer)
@@ -170,6 +174,10 @@ class ItemDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func pushItem(gesture: UIGestureRecognizer){
+        self.performSegueWithIdentifier("pushItem", sender: gesture)
+        print("pushItem")
+    }
     
     @IBAction func facebookBtn(sender: AnyObject) {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
@@ -209,14 +217,50 @@ class ItemDetailViewController: UIViewController {
     }
     
     
-    /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
+        
+        if (segue.identifier == "pushItem"){
+            
+            var index: Int = 0
+
+            print("ready for segue")
+            
+            if let gesture = sender as? UIGestureRecognizer {
+                switch gesture{
+                case gesture1:
+                    index = 0
+                    print("gesture1")
+                    break
+                case gesture2:
+                    index = 1
+                    print("gesture2")
+                    break
+                case gesture3:
+                    index = 2
+                    print("gesture3")
+                    break
+                case gesture4:
+                    index = 3
+                    print("gesture4")
+                    break
+                default:
+                    break
+                }
+
+            }
+            
+            let entertainment = recommendations[index]
+            
+            let detailViewController = segue.destinationViewController as! ItemDetailViewController
+            
+            detailViewController.entertainment = entertainment
+        }
+
      }
-     */
     
 }
