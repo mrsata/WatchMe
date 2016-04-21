@@ -12,8 +12,9 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var trendingTableView: UITableView!
-    @IBOutlet weak var scrollView: UIScrollView!
     
+    var headerView: UIView!
+    var scrollView: UIScrollView!
     var pageControl: UIPageControl!
     var frame: CGRect = CGRectMake(0, 0, 0, 0)
     var trending: [Entertainment]!
@@ -26,12 +27,18 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        let backgroundImageViewFrame = self.view.frame
+        let backgroundImageView = UIImageView(frame: backgroundImageViewFrame)
+        backgroundImageView.image = UIImage(contentsOfFile: "signin")
+        self.view.insertSubview(backgroundImageView, atIndex: 0)
         getTrendingMovies()
         getTrendingShows()
         
         // Initiate scrollView:
+        scrollView = UIScrollView()
         scrollView.delegate = self
-        scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 7, scrollView.frame.size.height)
+        scrollView.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width * 0.562)
+        scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * 7, scrollView.frame.size.height)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.bounces = false
         for index in 0..<7 {
@@ -42,17 +49,21 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             subViews.append(subView)
             scrollView.addSubview(subViews[index])
         }
-        
-        configurePageControl()
-        pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
-        
         let gesture = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
         scrollView.addGestureRecognizer(gesture)
         
         // Initiate trendingTableView:
         trendingTableView.dataSource = self
         trendingTableView.delegate = self
-        view.bringSubviewToFront(trendingTableView)
+        trendingTableView.showsVerticalScrollIndicator = false
+        headerView = UIView(frame: frame)
+        trendingTableView.sectionHeaderHeight = scrollView.frame.height
+        trendingTableView.tableHeaderView = headerView
+        headerView.addSubview(scrollView)
+        
+        // Initiate pageControl:
+        configurePageControl()
+        pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
         
     }
     
@@ -87,10 +98,10 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     
     // Functions supporting scrollView:
     func configurePageControl() {
-        self.pageControl = UIPageControl(frame: CGRectMake(0,scrollView.frame.origin.y + scrollView.frame.height - 25,self.view.frame.size.width, 25))
-        self.pageControl.numberOfPages = 5
-        self.pageControl.currentPage = 0
-        self.view.addSubview(pageControl)
+        pageControl = UIPageControl(frame: CGRectMake(0, scrollView.frame.height - 25, frame.width, 25))
+        pageControl.numberOfPages = 5
+        pageControl.currentPage = 0
+        headerView.addSubview(pageControl)
     }
     
     func changePage(sender: AnyObject) -> () {

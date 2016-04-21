@@ -89,11 +89,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ckl-zU-gx1">
-                                <rect key="frame" x="0.0" y="171" width="320" height="397"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="397" id="cxF-I0-XgV"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TrendingCell" rowHeight="92" id="H9q-TL-XTb" customClass="TrendingCell" customModule="WatchMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="65" width="320" height="92"/>
@@ -146,20 +143,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZb-qw-Ivd">
-                                <rect key="frame" x="0.0" y="64" width="320" height="162"/>
-                                <gestureRecognizers/>
-                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ckl-zU-gx1" firstAttribute="top" secondItem="SZb-qw-Ivd" secondAttribute="bottom" constant="-55" id="4Wc-aZ-zOp"/>
-                            <constraint firstItem="Ckl-zU-gx1" firstAttribute="bottom" secondItem="853-qp-WcX" secondAttribute="top" constant="49" id="9QO-io-N7r"/>
+                            <constraint firstItem="Ckl-zU-gx1" firstAttribute="top" secondItem="eMr-5F-d6B" secondAttribute="bottom" id="Ce2-rv-rJz"/>
                             <constraint firstAttribute="trailing" secondItem="Ckl-zU-gx1" secondAttribute="trailing" id="GkW-5h-GNu"/>
-                            <constraint firstItem="SZb-qw-Ivd" firstAttribute="leading" secondItem="NHL-1c-Mzh" secondAttribute="leading" id="Rk9-US-tNQ"/>
-                            <constraint firstItem="SZb-qw-Ivd" firstAttribute="trailing" secondItem="NHL-1c-Mzh" secondAttribute="trailing" id="S8s-90-DYS"/>
+                            <constraint firstAttribute="bottom" secondItem="Ckl-zU-gx1" secondAttribute="bottom" id="aVU-5x-f0s"/>
                             <constraint firstItem="Ckl-zU-gx1" firstAttribute="leading" secondItem="NHL-1c-Mzh" secondAttribute="leading" id="beB-jg-bWY"/>
-                            <constraint firstItem="SZb-qw-Ivd" firstAttribute="top" secondItem="eMr-5F-d6B" secondAttribute="bottom" id="bvt-yT-0I3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UzV-LC-y1m">
@@ -189,7 +179,6 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="scrollView" destination="SZb-qw-Ivd" id="wIN-2P-glW"/>
                         <outlet property="segmentedControl" destination="sJN-2k-B6c" id="77o-pr-z7N"/>
                         <outlet property="trendingTableView" destination="Ckl-zU-gx1" id="ivv-bK-qRd"/>
                         <segue destination="ZOV-5d-9A2" kind="push" identifier="pushItem" id="1Ho-Mn-kH6"/>
