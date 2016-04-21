@@ -46,7 +46,7 @@ class ItemDetailViewController: UIViewController {
         backgroundImageView.setImageWithURL(entertainment.posterImageUrl!)
         backgroundImageView.alpha = 0.2
         self.view.insertSubview(backgroundImageView, atIndex: 0)
-        
+
         mainTitleLabel.text = entertainment.title
         mainImageView.setImageWithURL(entertainment.posterImageUrl!)
         mainDescriptionLabel.text = entertainment.content
