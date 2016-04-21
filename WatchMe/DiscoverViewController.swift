@@ -46,6 +46,9 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         configurePageControl()
         pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
         
+        let gesture = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
+        scrollView.addGestureRecognizer(gesture)
+        
         // Initiate trendingTableView:
         trendingTableView.dataSource = self
         trendingTableView.delegate = self
@@ -132,6 +135,10 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         }
     }
     
+    func pushItem(gesture: UIGestureRecognizer){
+        self.performSegueWithIdentifier("pushItem", sender: gesture)
+    }
+    
     // Functions supporting tableView:
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -198,7 +205,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             detailViewController.entertainment = trendingEntertainment
         }
         
-        if let gesture = sender as? UITapGestureRecognizer{
+        if (segue.identifier == "pushItem"){
             
             let index = topIndexs[pageControl.currentPage]
             let trendingEntertainment = trending[index]
