@@ -21,10 +21,6 @@ class ItemDetailViewController: UIViewController {
     @IBOutlet weak var recommended2ImageView: UIImageView!
     @IBOutlet weak var recommended3ImageView: UIImageView!
     @IBOutlet weak var recommended4ImageView: UIImageView!
-    @IBOutlet weak var recommended1TitleLabel: UILabel!
-    @IBOutlet weak var recommended2TitleLabel: UILabel!
-    @IBOutlet weak var recommended3TitleLabel: UILabel!
-    @IBOutlet weak var recommended4TitleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var phantomBtn: UIButton!
     
@@ -87,7 +83,7 @@ class ItemDetailViewController: UIViewController {
                     
                     let w = self.view.frame.width - 40
                     let h = self.view.frame.height * 0.27
-                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY + 30, width: w, height: h))
+                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY + 4, width: w, height: h))
                     
                     moviePlayer.loadVideoURL(videoURL!)
                     self.view.addSubview(moviePlayer)
@@ -105,10 +101,10 @@ class ItemDetailViewController: UIViewController {
                 self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
                 self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
                 
-                self.recommended1TitleLabel.text = response[0].title
-                self.recommended2TitleLabel.text = response[1].title
-                self.recommended3TitleLabel.text = response[2].title
-                self.recommended4TitleLabel.text = response[3].title
+//                self.recommended1TitleLabel.text = response[0].title
+//                self.recommended2TitleLabel.text = response[1].title
+//                self.recommended3TitleLabel.text = response[2].title
+//                self.recommended4TitleLabel.text = response[3].title
                 
                 }) { (error: NSError) -> () in
                     
@@ -135,7 +131,7 @@ class ItemDetailViewController: UIViewController {
                     
                     let w = self.view.frame.width - 40
                     let h = self.view.frame.height * 0.27
-                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY + 30, width: w, height: h))
+                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY, width: w, height: h))
                     
                     moviePlayer.loadVideoURL(videoURL!)
                     self.view.addSubview(moviePlayer)
@@ -153,10 +149,10 @@ class ItemDetailViewController: UIViewController {
                 self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
                 self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
                 
-                self.recommended1TitleLabel.text = response[0].title
-                self.recommended2TitleLabel.text = response[1].title
-                self.recommended3TitleLabel.text = response[2].title
-                self.recommended4TitleLabel.text = response[3].title
+//                self.recommended1TitleLabel.text = response[0].title
+//                self.recommended2TitleLabel.text = response[1].title
+//                self.recommended3TitleLabel.text = response[2].title
+//                self.recommended4TitleLabel.text = response[3].title
                 
                 }) { (error: NSError) -> () in
                     
