@@ -18,17 +18,16 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource,UIC
 
         // Do any additional setup after loading the view.
         
+        let frame = self.view.frame
+        let backgroundImageView = UIImageView(frame: frame)
+        backgroundImageView.image = UIImage(named: "BG")
+        backgroundImageView.alpha = 0.6
+        self.view.insertSubview(backgroundImageView, atIndex: 0)
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-//        Client.sharedInstance.getCollection({ (entertainment: [Entertainment]) -> () in
-//            
-//            self.collection = entertainment
-//            self.collectionView.reloadData()
-//            }) { (error: NSError) -> () in
-//                
-//        }
+        collectionView.backgroundColor = UIColor.clearColor()
+
     }
     
     override func viewDidAppear(animated: Bool) {

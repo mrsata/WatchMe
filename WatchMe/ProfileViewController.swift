@@ -10,26 +10,28 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    var numCollection: Int?
-    
-    var user: User!
-    
-    var createdAt: NSDate?
-
     @IBOutlet weak var username: UILabel!
-    
     @IBOutlet weak var numCollected: UILabel!
-    
     @IBOutlet weak var joinTime: UILabel!
     
+    var numCollection: Int?
+    var user: User!
+    var createdAt: NSDate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let frame = self.view.frame
+        let backgroundImageView = UIImageView(frame: frame)
+        backgroundImageView.image = UIImage(named: "BG")
+        backgroundImageView.alpha = 0.6
+        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        
         Client.sharedInstance.getSettings("IodineXXY", success: { (response: NSDictionary) -> () in
             // Time format
-            var formatter = NSDateFormatter()
+            let formatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"
             print(response["user"]!["joined_at"])
             
