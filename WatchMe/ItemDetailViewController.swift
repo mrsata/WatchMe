@@ -22,7 +22,7 @@ class ItemDetailViewController: UIViewController {
     @IBOutlet weak var recommended3ImageView: UIImageView!
     @IBOutlet weak var recommended4ImageView: UIImageView!
     @IBOutlet weak var yearLabel: UILabel!
-    @IBOutlet weak var phantomBtn: UIButton!
+    
     
     var trailerString: String!
     var entertainment: Entertainment!
@@ -33,7 +33,8 @@ class ItemDetailViewController: UIViewController {
     var gesture2: UITapGestureRecognizer!
     var gesture3: UITapGestureRecognizer!
     var gesture4: UITapGestureRecognizer!
-
+    var phantomBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +43,7 @@ class ItemDetailViewController: UIViewController {
         let frame = self.view.frame
         let backgroundImageView = UIImageView(frame: frame)
         backgroundImageView.setImageWithURL(entertainment.posterImageUrl!)
-        backgroundImageView.alpha = 0.4
+        backgroundImageView.alpha = 0.3
         self.view.insertSubview(backgroundImageView, atIndex: 0)
 
         mainTitleLabel.text = entertainment.title
@@ -61,7 +62,7 @@ class ItemDetailViewController: UIViewController {
         recommended2ImageView.addGestureRecognizer(self.gesture2)
         recommended3ImageView.addGestureRecognizer(self.gesture3)
         recommended4ImageView.addGestureRecognizer(self.gesture4)
-        phantomBtn.hidden = true
+        phantomBtn = UIButton()
         
         if(entertainment.type == "Movie")
         {
