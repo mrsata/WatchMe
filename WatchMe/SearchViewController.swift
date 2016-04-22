@@ -60,10 +60,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("Search button has been clicked")
-        
+        searchBar.endEditing(true)
         Client.sharedInstance.search(searchBar.text, type: nil, year: nil, success: { (data: [Entertainment]) -> () in
+            
             self.entertainments = data
             self.searchTableView.reloadData()
+            
         }) { (error: NSError) -> () in
             print(error)
         }
