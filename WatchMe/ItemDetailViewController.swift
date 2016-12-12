@@ -54,10 +54,10 @@ class ItemDetailViewController: UIViewController {
         
         let id = entertainment.ids?.valueForKey("imdb") as? String
         
-        gesture1 = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
-        gesture2 = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
-        gesture3 = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
-        gesture4 = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
+        gesture1 = UITapGestureRecognizer(target: self, action: #selector(ItemDetailViewController.pushItem(_:)))
+        gesture2 = UITapGestureRecognizer(target: self, action: #selector(ItemDetailViewController.pushItem(_:)))
+        gesture3 = UITapGestureRecognizer(target: self, action: #selector(ItemDetailViewController.pushItem(_:)))
+        gesture4 = UITapGestureRecognizer(target: self, action: #selector(ItemDetailViewController.pushItem(_:)))
         recommended1ImageView.addGestureRecognizer(self.gesture1)
         recommended2ImageView.addGestureRecognizer(self.gesture2)
         recommended3ImageView.addGestureRecognizer(self.gesture3)

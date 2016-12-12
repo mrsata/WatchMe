@@ -54,7 +54,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             subViews.append(subView)
             scrollView.addSubview(subViews[index])
         }
-        let gesture = UITapGestureRecognizer(target: self, action: Selector("pushItem:"))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(DiscoverViewController.pushItem(_:)))
         scrollView.addGestureRecognizer(gesture)
         
         // Initiate trendingTableView:
@@ -70,10 +70,10 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         
         // Initiate pageControl:
         configurePageControl()
-        pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
+        pageControl.addTarget(self, action: #selector(DiscoverViewController.changePage(_:)), forControlEvents: UIControlEvents.ValueChanged)
         
         // Initiate timer:
-        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("autoScroll:"), userInfo: nil, repeats: true)
+        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(DiscoverViewController.autoScroll(_:)), userInfo: nil, repeats: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -172,7 +172,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     
     func resetTimer(){
         scrollTimer.invalidate()
-        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("autoScroll:"), userInfo: nil, repeats: true)
+        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(DiscoverViewController.autoScroll(_:)), userInfo: nil, repeats: true)
     }
     
     func pushItem(gesture: UIGestureRecognizer){
