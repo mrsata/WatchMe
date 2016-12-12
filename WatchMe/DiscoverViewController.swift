@@ -16,6 +16,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     var headerView: UIView!
     var scrollView: UIScrollView!
     var pageControl: UIPageControl!
+    var scrollTimer: NSTimer!
     var frame: CGRect = CGRectMake(0, 0, 0, 0)
     var trending: [Entertainment]!
     var trendingMovies: [Entertainment]!
@@ -27,6 +28,9 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+//        let logoItem = UIBarButtonItem()
+//        logoItem.image = UIImage(named:"watchme")
+//        navigationItem.leftBarButtonItem = logoItem
         let backgroundImageViewFrame = self.view.frame
         let backgroundImageView = UIImageView(frame: backgroundImageViewFrame)
         backgroundImageView.image = UIImage(named: "BG")
@@ -68,6 +72,8 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         configurePageControl()
         pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
         
+        // Initiate timer:
+        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("autoScroll:"), userInfo: nil, repeats: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,6 +129,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
                 scrollView.setContentOffset(CGPointMake(self.view.frame.size.width * 5, 0), animated: false)
             }
             pageControl.currentPage = Int(pageNumber)
+            resetTimer()
         }
     }
 
@@ -147,6 +154,25 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
                 self.subViews[0].setImageWithURL(imageUrl)
             }
         }
+    }
+    
+    func autoScroll(sender: AnyObject) -> (){
+        let x = scrollView.contentOffset.x + self.view.frame.size.width
+        scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+        var pageNumber = pageControl.currentPage + 1
+        if(pageControl.currentPage == 4 && pageNumber == 5){
+            pageNumber = 0
+            scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
+        } else if(pageControl.currentPage == 0 && pageNumber == -1){
+            pageNumber = 4
+            scrollView.setContentOffset(CGPointMake(self.view.frame.size.width * 5, 0), animated: false)
+        }
+        pageControl.currentPage = Int(pageNumber)
+    }
+    
+    func resetTimer(){
+        scrollTimer.invalidate()
+        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("autoScroll:"), userInfo: nil, repeats: true)
     }
     
     func pushItem(gesture: UIGestureRecognizer){
@@ -212,7 +238,9 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        if let cell = sender as? UITableViewCell{
+        if let cell = sender as? TrendingCell{
+            
+            cell.selected = false
             
             let indexPath = trendingTableView.indexPathForCell(cell)
             let trendingEntertainment = trending[indexPath!.row]

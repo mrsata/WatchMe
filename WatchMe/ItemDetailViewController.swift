@@ -21,12 +21,8 @@ class ItemDetailViewController: UIViewController {
     @IBOutlet weak var recommended2ImageView: UIImageView!
     @IBOutlet weak var recommended3ImageView: UIImageView!
     @IBOutlet weak var recommended4ImageView: UIImageView!
-    @IBOutlet weak var recommended1TitleLabel: UILabel!
-    @IBOutlet weak var recommended2TitleLabel: UILabel!
-    @IBOutlet weak var recommended3TitleLabel: UILabel!
-    @IBOutlet weak var recommended4TitleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
-    @IBOutlet weak var phantomBtn: UIButton!
+    
     
     var trailerString: String!
     var entertainment: Entertainment!
@@ -37,7 +33,8 @@ class ItemDetailViewController: UIViewController {
     var gesture2: UITapGestureRecognizer!
     var gesture3: UITapGestureRecognizer!
     var gesture4: UITapGestureRecognizer!
-
+    var phantomBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,7 +43,7 @@ class ItemDetailViewController: UIViewController {
         let frame = self.view.frame
         let backgroundImageView = UIImageView(frame: frame)
         backgroundImageView.setImageWithURL(entertainment.posterImageUrl!)
-        backgroundImageView.alpha = 0.4
+        backgroundImageView.alpha = 0.3
         self.view.insertSubview(backgroundImageView, atIndex: 0)
 
         mainTitleLabel.text = entertainment.title
@@ -65,7 +62,7 @@ class ItemDetailViewController: UIViewController {
         recommended2ImageView.addGestureRecognizer(self.gesture2)
         recommended3ImageView.addGestureRecognizer(self.gesture3)
         recommended4ImageView.addGestureRecognizer(self.gesture4)
-        phantomBtn.hidden = true
+        phantomBtn = UIButton()
         
         if(entertainment.type == "Movie")
         {
@@ -87,7 +84,7 @@ class ItemDetailViewController: UIViewController {
                     
                     let w = self.view.frame.width - 40
                     let h = self.view.frame.height * 0.27
-                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY + 30, width: w, height: h))
+                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY + 4, width: w, height: h))
                     
                     moviePlayer.loadVideoURL(videoURL!)
                     self.view.addSubview(moviePlayer)
@@ -105,10 +102,10 @@ class ItemDetailViewController: UIViewController {
                 self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
                 self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
                 
-                self.recommended1TitleLabel.text = response[0].title
-                self.recommended2TitleLabel.text = response[1].title
-                self.recommended3TitleLabel.text = response[2].title
-                self.recommended4TitleLabel.text = response[3].title
+//                self.recommended1TitleLabel.text = response[0].title
+//                self.recommended2TitleLabel.text = response[1].title
+//                self.recommended3TitleLabel.text = response[2].title
+//                self.recommended4TitleLabel.text = response[3].title
                 
                 }) { (error: NSError) -> () in
                     
@@ -135,7 +132,7 @@ class ItemDetailViewController: UIViewController {
                     
                     let w = self.view.frame.width - 40
                     let h = self.view.frame.height * 0.27
-                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY + 30, width: w, height: h))
+                    let moviePlayer = YouTubePlayerView(frame: CGRect(x: 20, y: self.mainDescriptionLabel.frame.maxY, width: w, height: h))
                     
                     moviePlayer.loadVideoURL(videoURL!)
                     self.view.addSubview(moviePlayer)
@@ -153,10 +150,10 @@ class ItemDetailViewController: UIViewController {
                 self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
                 self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
                 
-                self.recommended1TitleLabel.text = response[0].title
-                self.recommended2TitleLabel.text = response[1].title
-                self.recommended3TitleLabel.text = response[2].title
-                self.recommended4TitleLabel.text = response[3].title
+//                self.recommended1TitleLabel.text = response[0].title
+//                self.recommended2TitleLabel.text = response[1].title
+//                self.recommended3TitleLabel.text = response[2].title
+//                self.recommended4TitleLabel.text = response[3].title
                 
                 }) { (error: NSError) -> () in
                     
