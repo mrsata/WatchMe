@@ -23,14 +23,15 @@ class User: NSObject {
         self.dictionary = dictionary
         super.init()
         
-        name = dictionary["user"]!["username"] as? String
+        let user = dictionary["user"] as! NSDictionary
+        name = user["username"] as? String
     }
 
     func logout(){
         User.currentUser = nil
         //Client.sharedInstance.requestSerializer.removeAccessToken()
         
-        NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: userDidLogoutNotification), object: nil)
     }
 
     
@@ -40,11 +41,11 @@ class User: NSObject {
         get {
         if _currentUser == nil {
         //logged out or just boot up
-        let data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
+        let data = UserDefaults.standard.object(forKey: currentUserKey) as? Data
         if data != nil {
         let dictionary: NSDictionary?
         do {
-        try dictionary = NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
+        try dictionary = JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
         _currentUser = User(dictionary: dictionary!)
     } catch {
         print(error)
@@ -57,14 +58,14 @@ class User: NSObject {
         
         set(user) {
             _currentUser = user
-            print(_currentUser)
+            print(_currentUser ?? "no current user")
             //User need to implement NSCoding; but, JSON also serialized by default
             if let _ = _currentUser {
-                var data: NSData?
+                var data: Data?
                 do {
-                    try data = NSJSONSerialization.dataWithJSONObject(user!.dictionary, options: .PrettyPrinted)
-                    NSUserDefaults.standardUserDefaults().setObject(data, forKey: currentUserKey)
-                    NSUserDefaults.standardUserDefaults().synchronize()
+                    try data = JSONSerialization.data(withJSONObject: user!.dictionary, options: .prettyPrinted)
+                    UserDefaults.standard.set(data, forKey: currentUserKey)
+                    UserDefaults.standard.synchronize()
                 } catch {
                     print(error)
                 }

@@ -16,8 +16,8 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     var headerView: UIView!
     var scrollView: UIScrollView!
     var pageControl: UIPageControl!
-    var scrollTimer: NSTimer!
-    var frame: CGRect = CGRectMake(0, 0, 0, 0)
+    var scrollTimer: Timer!
+    var frame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var trending: [Entertainment]!
     var trendingMovies: [Entertainment]!
     var trendingShows:  [Entertainment]!
@@ -35,21 +35,21 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         let backgroundImageView = UIImageView(frame: backgroundImageViewFrame)
         backgroundImageView.image = UIImage(named: "BG")
         backgroundImageView.alpha = 0.4
-        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        self.view.insertSubview(backgroundImageView, at: 0)
         getTrendingMovies()
         getTrendingShows()
         
         // Initiate scrollView:
         scrollView = UIScrollView()
         scrollView.delegate = self
-        scrollView.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width * 0.562)
-        scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * 7, scrollView.frame.size.height)
+        scrollView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.width * 0.562)
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width * 7, height: scrollView.frame.size.height)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.bounces = false
         for index in 0..<7 {
             frame.origin.x = self.view.frame.size.width * CGFloat(index)
-            frame.size = CGSizeMake(self.view.frame.size.width, scrollView.frame.size.height)
-            scrollView.pagingEnabled = true
+            frame.size = CGSize(width: self.view.frame.size.width, height: scrollView.frame.size.height)
+            scrollView.isPagingEnabled = true
             let subView = UIImageView(frame: frame)
             subViews.append(subView)
             scrollView.addSubview(subViews[index])
@@ -66,14 +66,14 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         trendingTableView.tableHeaderView = headerView
         headerView.addSubview(scrollView)
         trendingTableView.bounces = false
-        trendingTableView.backgroundColor = UIColor.clearColor()
+        trendingTableView.backgroundColor = UIColor.clear
         
         // Initiate pageControl:
         configurePageControl()
-        pageControl.addTarget(self, action: #selector(DiscoverViewController.changePage(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        pageControl.addTarget(self, action: #selector(DiscoverViewController.changePage(_:)), for: UIControlEvents.valueChanged)
         
         // Initiate timer:
-        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(DiscoverViewController.autoScroll(_:)), userInfo: nil, repeats: true)
+        scrollTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(DiscoverViewController.autoScroll(_:)), userInfo: nil, repeats: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,7 +87,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             self.trendingMovies = data
             self.trending = self.trendingMovies
             self.reloadScrollViewData()
-            self.scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: true)
+            self.scrollView.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: true)
             self.trendingTableView.reloadData()
             print("succeed")
         }) { (error: NSError) -> () in
@@ -104,29 +104,28 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         }
     }
     
-    
     // Functions supporting scrollView:
     func configurePageControl() {
-        pageControl = UIPageControl(frame: CGRectMake(0, headerView.frame.height - 25, headerView.frame.width, 25))
+        pageControl = UIPageControl(frame: CGRect(x: 0, y: headerView.frame.height - 25, width: headerView.frame.width, height: 25))
         pageControl.numberOfPages = 5
         pageControl.currentPage = 0
         headerView.addSubview(pageControl)
     }
     
-    func changePage(sender: AnyObject) -> () {
+    func changePage(_ sender: AnyObject) -> () {
         let x = CGFloat(pageControl.currentPage) * self.view.frame.size.width
-        scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if let scrollView = self.scrollView{
             var pageNumber = Int(round(scrollView.contentOffset.x / self.view.frame.size.width)) - 1
             if(pageControl.currentPage == 4 && pageNumber == 5){
                 pageNumber = 0
-                scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
+                scrollView.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: false)
             } else if(pageControl.currentPage == 0 && pageNumber == -1){
                 pageNumber = 4
-                scrollView.setContentOffset(CGPointMake(self.view.frame.size.width * 5, 0), animated: false)
+                scrollView.setContentOffset(CGPoint(x: self.view.frame.size.width * 5, y: 0), animated: false)
             }
             pageControl.currentPage = Int(pageNumber)
             resetTimer()
@@ -142,45 +141,48 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             } else {
                 i = topIndexs[index-1] + 1
             }
-            while(self.trending[i].thumbImageUrl == nil){
-                i += 1
-            }
-            topIndexs[index] = i
-            let imageUrl:NSURL = self.trending[i].thumbImageUrl!
-            self.subViews[index + 1].setImageWithURL(imageUrl)
+//            while(self.trending[i].thumbImageUrl == nil){
+//                i += 1
+//            }
+//            topIndexs[index] = i
+//            let imageUrl:URL = self.trending[i].thumbImageUrl! as URL
+            let noImageUrl: URL = URL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
+            let imageUrl:URL = noImageUrl
+            //
+            self.subViews[index + 1].setImageWith(imageUrl)
             if(index==0){
-                self.subViews[6].setImageWithURL(imageUrl)
+                self.subViews[6].setImageWith(imageUrl)
             } else if(index==4){
-                self.subViews[0].setImageWithURL(imageUrl)
+                self.subViews[0].setImageWith(imageUrl)
             }
         }
     }
     
-    func autoScroll(sender: AnyObject) -> (){
+    func autoScroll(_ sender: AnyObject) -> (){
         let x = scrollView.contentOffset.x + self.view.frame.size.width
-        scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
         var pageNumber = pageControl.currentPage + 1
         if(pageControl.currentPage == 4 && pageNumber == 5){
             pageNumber = 0
-            scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
+            scrollView.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: false)
         } else if(pageControl.currentPage == 0 && pageNumber == -1){
             pageNumber = 4
-            scrollView.setContentOffset(CGPointMake(self.view.frame.size.width * 5, 0), animated: false)
+            scrollView.setContentOffset(CGPoint(x: self.view.frame.size.width * 5, y: 0), animated: false)
         }
         pageControl.currentPage = Int(pageNumber)
     }
     
     func resetTimer(){
         scrollTimer.invalidate()
-        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(DiscoverViewController.autoScroll(_:)), userInfo: nil, repeats: true)
+        scrollTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(DiscoverViewController.autoScroll(_:)), userInfo: nil, repeats: true)
     }
     
-    func pushItem(gesture: UIGestureRecognizer){
-        self.performSegueWithIdentifier("pushItem", sender: gesture)
+    func pushItem(_ gesture: UIGestureRecognizer){
+        self.performSegue(withIdentifier: "pushItem", sender: gesture)
     }
     
     // Functions supporting tableView:
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         var count:Int?
         
@@ -195,35 +197,35 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
         return count!
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("TrendingCell", forIndexPath: indexPath) as! TrendingCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TrendingCell", for: indexPath) as! TrendingCell
         
         cell.trending = trending[indexPath.row]
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
         
         return cell
         
     }
 
     // Functions for segementedControll
-    @IBAction func indexChanged(sender: UISegmentedControl) {
+    @IBAction func indexChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex
         {
         case 0:
             trending = trendingMovies
             trendingTableView.reloadData()
-            trendingTableView.setContentOffset(CGPointMake(0,0), animated: true)
+            trendingTableView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
             reloadScrollViewData()
-            scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
+            scrollView.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: false)
             pageControl.currentPage = 0
         case 1:
             trending = trendingShows
             trendingTableView.reloadData()
-            trendingTableView.setContentOffset(CGPointMake(0,0), animated: true)
+            trendingTableView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
             reloadScrollViewData()
-            scrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
+            scrollView.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: false)
             pageControl.currentPage = 0
         default:
             break;
@@ -234,18 +236,18 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if let cell = sender as? TrendingCell{
             
-            cell.selected = false
+            cell.isSelected = false
             
-            let indexPath = trendingTableView.indexPathForCell(cell)
+            let indexPath = trendingTableView.indexPath(for: cell)
             let trendingEntertainment = trending[indexPath!.row]
             
-            let detailViewController = segue.destinationViewController as! ItemDetailViewController
+            let detailViewController = segue.destination as! ItemDetailViewController
             
             detailViewController.entertainment = trendingEntertainment
         }
@@ -255,7 +257,7 @@ class DiscoverViewController: UIViewController, UIScrollViewDelegate, UITableVie
             let index = topIndexs[pageControl.currentPage]
             let trendingEntertainment = trending[index]
             
-            let detailViewController = segue.destinationViewController as! ItemDetailViewController
+            let detailViewController = segue.destination as! ItemDetailViewController
             
             detailViewController.entertainment = trendingEntertainment
         }

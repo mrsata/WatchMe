@@ -40,12 +40,12 @@ class ProfileCollectionViewController: UIViewController {
         // Do any additional setup after loading the view.
         // Load top 6 from collections.
         Client.sharedInstance.getCollection({ (response: [Entertainment]) -> () in
-            self.collection1.setImageWithURL(response[0].posterImageUrl!)
-            self.collection2.setImageWithURL(response[1].posterImageUrl!)
-            self.collection3.setImageWithURL(response[2].posterImageUrl!)
-            self.collection4.setImageWithURL(response[3].posterImageUrl!)
-            self.collection5.setImageWithURL(response[4].posterImageUrl!)
-            self.collection6.setImageWithURL(response[5].posterImageUrl!)
+            self.collection1.setImageWith(response[0].posterImageUrl!)
+            self.collection2.setImageWith(response[1].posterImageUrl!)
+            self.collection3.setImageWith(response[2].posterImageUrl!)
+            self.collection4.setImageWith(response[3].posterImageUrl!)
+            self.collection5.setImageWith(response[4].posterImageUrl!)
+            self.collection6.setImageWith(response[5].posterImageUrl!)
             
             self.name1.text = response[0].title
             self.name2.text = response[1].title

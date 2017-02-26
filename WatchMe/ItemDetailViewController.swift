@@ -42,17 +42,17 @@ class ItemDetailViewController: UIViewController {
         
         let frame = self.view.frame
         let backgroundImageView = UIImageView(frame: frame)
-        backgroundImageView.setImageWithURL(entertainment.posterImageUrl!)
+        backgroundImageView.setImageWith(entertainment.posterImageUrl! as URL)
         backgroundImageView.alpha = 0.3
-        self.view.insertSubview(backgroundImageView, atIndex: 0)
-
+        self.view.insertSubview(backgroundImageView, at: 0)
+        
         mainTitleLabel.text = entertainment.title
         mainDescriptionLabel.text = entertainment.content
         mainDescriptionLabel.sizeToFit()
         
         yearLabel.text = "\(entertainment.year!)"
         
-        let id = entertainment.ids?.valueForKey("imdb") as? String
+        let id = entertainment.ids?.value(forKey: "imdb") as? String
         
         gesture1 = UITapGestureRecognizer(target: self, action: #selector(ItemDetailViewController.pushItem(_:)))
         gesture2 = UITapGestureRecognizer(target: self, action: #selector(ItemDetailViewController.pushItem(_:)))
@@ -80,7 +80,7 @@ class ItemDetailViewController: UIViewController {
                     //                self.view.layer.addSublayer(playerLayer)
                     //                player.play()
                     
-                    let videoURL = NSURL(string: self.trailerString!)
+                    let videoURL = URL(string: self.trailerString!)
                     
                     let w = self.view.frame.width - 40
                     let h = self.view.frame.height * 0.27
@@ -90,36 +90,35 @@ class ItemDetailViewController: UIViewController {
                     self.view.addSubview(moviePlayer)
                     
                 }
-                }) { (error: NSError) -> () in
-                    
+            }) { (error: NSError) -> () in
+                
             }
             
             Client.sharedInstance.getMovieRecommendation(id!, success: { (response: [Recommendation]) -> () in
                 //self.recommendations = response
                 
-                self.recommended1ImageView.setImageWithURL(response[0].posterImageUrl!)
-                self.recommended2ImageView.setImageWithURL(response[1].posterImageUrl!)
-                self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
-                self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
+                self.recommended1ImageView.setImageWith(response[0].posterImageUrl!)
+                self.recommended2ImageView.setImageWith(response[1].posterImageUrl!)
+                self.recommended3ImageView.setImageWith(response[2].posterImageUrl!)
+                self.recommended4ImageView.setImageWith(response[3].posterImageUrl!)
                 
-//                self.recommended1TitleLabel.text = response[0].title
-//                self.recommended2TitleLabel.text = response[1].title
-//                self.recommended3TitleLabel.text = response[2].title
-//                self.recommended4TitleLabel.text = response[3].title
+                //                self.recommended1TitleLabel.text = response[0].title
+                //                self.recommended2TitleLabel.text = response[1].title
+                //                self.recommended3TitleLabel.text = response[2].title
+                //                self.recommended4TitleLabel.text = response[3].title
                 
-                }) { (error: NSError) -> () in
-                    
+            }) { (error: NSError) -> () in
+                
             }
-
+            
         }
         else if (entertainment.type == "Show")
         {
             Client.sharedInstance.getShowSummary(id!, success: { (response: NSDictionary) -> () in
                 
-                if(response["trailer"] != nil)
-                {
-                    self.trailerString = response["trailer"] as? String
-                    print(self.trailerString)
+                if let trailerString = response["trailer"] as? String{
+                    self.trailerString = trailerString
+                    print(self.trailerString ?? "nil trailerString")
                     
                     //                let videoURL = NSURL(string: self.trailerString!)
                     //                let player = AVPlayer(URL: videoURL!)
@@ -128,7 +127,7 @@ class ItemDetailViewController: UIViewController {
                     //                self.view.layer.addSublayer(playerLayer)
                     //                player.play()
                     
-                    let videoURL = NSURL(string: self.trailerString!)
+                    let videoURL = URL(string: self.trailerString!)
                     
                     let w = self.view.frame.width - 40
                     let h = self.view.frame.height * 0.27
@@ -136,95 +135,94 @@ class ItemDetailViewController: UIViewController {
                     
                     moviePlayer.loadVideoURL(videoURL!)
                     self.view.addSubview(moviePlayer)
-                    
                 }
-                }) { (error: NSError) -> () in
-                    
+            }) { (error: NSError) -> () in
+                
             }
             
             Client.sharedInstance.getShowRecommendation(id!, success: { (response: [Recommendation]) -> () in
                 //self.recommendations = response
                 
-                self.recommended1ImageView.setImageWithURL(response[0].posterImageUrl!)
-                self.recommended2ImageView.setImageWithURL(response[1].posterImageUrl!)
-                self.recommended3ImageView.setImageWithURL(response[2].posterImageUrl!)
-                self.recommended4ImageView.setImageWithURL(response[3].posterImageUrl!)
+                self.recommended1ImageView.setImageWith(response[0].posterImageUrl!)
+                self.recommended2ImageView.setImageWith(response[1].posterImageUrl!)
+                self.recommended3ImageView.setImageWith(response[2].posterImageUrl!)
+                self.recommended4ImageView.setImageWith(response[3].posterImageUrl!)
                 
-//                self.recommended1TitleLabel.text = response[0].title
-//                self.recommended2TitleLabel.text = response[1].title
-//                self.recommended3TitleLabel.text = response[2].title
-//                self.recommended4TitleLabel.text = response[3].title
+                //                self.recommended1TitleLabel.text = response[0].title
+                //                self.recommended2TitleLabel.text = response[1].title
+                //                self.recommended3TitleLabel.text = response[2].title
+                //                self.recommended4TitleLabel.text = response[3].title
                 
-                }) { (error: NSError) -> () in
-                    
+            }) { (error: NSError) -> () in
+                
             }
-
-
+            
+            
         }
-       
+        
         
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func pushItem(gesture: UIGestureRecognizer){
-        self.performSegueWithIdentifier("pushItem", sender: gesture)
+    func pushItem(_ gesture: UIGestureRecognizer){
+        self.performSegue(withIdentifier: "pushItem", sender: gesture)
         print("pushItem")
     }
     
-    @IBAction func facebookBtn(sender: AnyObject) {
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
+    @IBAction func facebookBtn(_ sender: AnyObject) {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
             
             print("ready to share on Facebook")
             
             let fbShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             
-            self.presentViewController(fbShare, animated: true, completion: nil)
+            self.present(fbShare, animated: true, completion: nil)
             
         } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         
     }
     
-    @IBAction func twitterBtn(sender: AnyObject) {
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+    @IBAction func twitterBtn(_ sender: AnyObject) {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
             
             print("ready to share on Twitter")
             
             let tweetShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             
-            self.presentViewController(tweetShare, animated: true, completion: nil)
+            self.present(tweetShare, animated: true, completion: nil)
             
         } else {
             
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to tweet.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to tweet.", preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
         
         if (segue.identifier == "pushItem"){
             
             var index: Int = 0
-
+            
             print("ready for segue")
             
             if let gesture = sender as? UIGestureRecognizer {
@@ -248,16 +246,16 @@ class ItemDetailViewController: UIViewController {
                 default:
                     break
                 }
-
+                
             }
             
             let entertainment = recommendations[index]
             
-            let detailViewController = segue.destinationViewController as! ItemDetailViewController
+            let detailViewController = segue.destination as! ItemDetailViewController
             
             detailViewController.entertainment = entertainment
         }
-
-     }
+        
+    }
     
 }

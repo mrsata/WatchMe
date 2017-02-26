@@ -21,10 +21,10 @@ class TrendingCell: UITableViewCell {
             titleLabel.text = trending.title
             descriptionLabel.text = trending.content
             if let posterImageUrl = trending.posterImageUrl {
-                posterImageView.setImageWithURL(posterImageUrl)
+                posterImageView.setImageWith(posterImageUrl as URL)
             } else {
-                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
-                posterImageView.setImageWithURL(noImageUrl)
+                let noImageUrl: URL = URL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
+                posterImageView.setImageWith(noImageUrl)
             }
         }
     }
@@ -35,7 +35,7 @@ class TrendingCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

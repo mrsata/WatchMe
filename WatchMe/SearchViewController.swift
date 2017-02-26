@@ -23,7 +23,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         let backgroundImageView = UIImageView(frame: backgroundImageViewFrame)
         backgroundImageView.image = UIImage(named: "BG")
         backgroundImageView.alpha = 0.4
-        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        self.view.insertSubview(backgroundImageView, at: 0)
         
         // Initialize searchBar:
         searchBar.delegate = self
@@ -32,8 +32,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         self.navigationItem.titleView = searchBar
         searchTableView.dataSource = self
         searchTableView.delegate = self
-        searchTableView.hidden = true
-        searchTableView.backgroundColor = UIColor.clearColor()
+        searchTableView.isHidden = true
+        searchTableView.backgroundColor = UIColor.clear
         
     }
     
@@ -44,12 +44,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     
     // Functions for searchBar:
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchTableView.hidden = false
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchTableView.isHidden = false
         
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         Client.sharedInstance.search(searchText, type: nil, year: nil, success: { (data: [Entertainment]) -> () in
             self.entertainments = data
             self.searchTableView.reloadData()
@@ -58,7 +58,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Search button has been clicked")
         searchBar.endEditing(true)
         Client.sharedInstance.search(searchBar.text, type: nil, year: nil, success: { (data: [Entertainment]) -> () in
@@ -71,7 +71,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count:Int?
         
         count = 0
@@ -85,24 +85,24 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         return count!
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("entertainmentCell", forIndexPath: indexPath) as! EntertainmentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "entertainmentCell", for: indexPath) as! EntertainmentCell
         
         cell.entertainment = entertainments[indexPath.row]
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
         
         return cell
         
     }
     
-    @IBAction func addCollection(sender: AnyObject) {
+    @IBAction func addCollection(_ sender: AnyObject) {
         let button = sender as! UIButton
         let view = button.superview!
         let cell = view.superview as! EntertainmentCell
         
-        let indexPath = searchTableView.indexPathForCell(cell)
+        let indexPath = searchTableView.indexPath(for: cell)
         
         let entertainment = entertainments[indexPath!.row]
         
@@ -113,10 +113,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }
     }
     
-    @IBAction func onTouch(sender: AnyObject) {
+    @IBAction func onTouch(_ sender: AnyObject) {
         self.searchBar.text = ""
         self.searchBar.resignFirstResponder()
-        self.performSegueWithIdentifier("cancelSearch", sender: nil)
+        self.performSegue(withIdentifier: "cancelSearch", sender: nil)
         
     }
     
@@ -124,16 +124,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if let cell = sender as? UITableViewCell{
             
-            let indexPath = searchTableView.indexPathForCell(cell)
+            let indexPath = searchTableView.indexPath(for: cell)
             let trendingEntertainment = entertainments[indexPath!.row]
             
-            let detailViewController = segue.destinationViewController as! ItemDetailViewController
+            let detailViewController = segue.destination as! ItemDetailViewController
             
             detailViewController.entertainment = trendingEntertainment
         }

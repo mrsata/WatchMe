@@ -30,11 +30,11 @@ class LoginViewController: UIViewController {
     }
     */
 
-    @IBAction func onSignIn(sender: AnyObject) {
+    @IBAction func onSignIn(_ sender: AnyObject) {
 
         Client.sharedInstance.loginWithCallback({ () -> () in
-            self.performSegueWithIdentifier("loginSegue", sender: nil)
-        }) { (error: NSError) -> () in
+            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+        }) { (error: Error) -> () in
             
         }
     }

@@ -22,7 +22,7 @@ class EntertainmentCell: UITableViewCell {
             let scorePercentage = entertainment.score! * 0.40
             scoreLabel.text = String(format: "%.0f",scorePercentage)+"%"
             titleLabel.text = entertainment.title
-            typeLabel.text = entertainment.type?.uppercaseString
+            typeLabel.text = entertainment.type?.uppercased()
             descriptionLabel.text = entertainment.content
             if let year = entertainment.year {
                 yearLabel.text = "(\(year))"
@@ -30,10 +30,10 @@ class EntertainmentCell: UITableViewCell {
                 yearLabel.text = "no year"
             }
             if let posterImageUrl = entertainment.posterImageUrl {
-                posterImageView.setImageWithURL(posterImageUrl)
+                posterImageView.setImageWith(posterImageUrl as URL)
             } else {
-                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
-                posterImageView.setImageWithURL(noImageUrl)
+                let noImageUrl: URL = URL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
+                posterImageView.setImageWith(noImageUrl)
             }
         }
     }
@@ -45,7 +45,7 @@ class EntertainmentCell: UITableViewCell {
         descriptionLabel.sizeToFit()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

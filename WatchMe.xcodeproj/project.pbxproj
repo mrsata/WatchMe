@@ -23,16 +23,14 @@
 		9BE5721B1CAB5BD20025A19E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */; };
 		9BEB8FAC1CC0432700A4260E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEB8FAB1CC0432700A4260E /* SearchViewController.swift */; };
 		9BEB8FB11CC0C7C200A4260E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BEB8FB01CC0C7C200A4260E /* Assets.xcassets */; };
+		E8D008F1C61AF18B33EF8DAF /* Pods_WatchMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A11D46F8DF7732AF50D35 /* Pods_WatchMe.framework */; };
 		EA3B248E1CB1A1FC0072B1ED /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3B248D1CB1A1FC0072B1ED /* CollectionViewCell.swift */; };
 		EA5EFC7F1CB0A03300BE6644 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5EFC7E1CB0A03300BE6644 /* ProfileViewController.swift */; };
 		EA5EFC811CB0B9A000BE6644 /* Entertainment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5EFC801CB0B9A000BE6644 /* Entertainment.swift */; };
 		EA5EFC831CB0B9C700BE6644 /* EntertainmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5EFC821CB0B9C700BE6644 /* EntertainmentCell.swift */; };
-		ECE438D3DCD25481BED040A7 /* Pods_WatchMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51530C3D118BCCA3317095C1 /* Pods_WatchMe.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2E080AB9FA8E104688C9AAC3 /* Pods-WatchMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.debug.xcconfig"; sourceTree = "<group>"; };
-		51530C3D118BCCA3317095C1 /* Pods_WatchMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6886EC2B1CA4E07A0040DE8F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		68B680B91CA21318000DC9EF /* WatchMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B680BC1CA21318000DC9EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,13 +43,15 @@
 		68B680DA1CA21E37000DC9EF /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		68B680E01CADEFA5000DC9EF /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		68B680E21CB730EA000DC9EF /* Recommendation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
-		76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.release.xcconfig"; sourceTree = "<group>"; };
+		918A11D46F8DF7732AF50D35 /* Pods_WatchMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		958696E81CC09A7B000A431B /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		9B6C153B1CA4D5C200EFD107 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9BC02D7D1CC2980B0038E46D /* TrendingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		9BE5721A1CAB5BD20025A19E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9BEB8FAB1CC0432700A4260E /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9BEB8FB01CC0C7C200A4260E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CB7A7C1CA65931660D4097F0 /* Pods-WatchMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.release.xcconfig"; sourceTree = "<group>"; };
+		DCEFC81B72DE7542CA970798 /* Pods-WatchMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe.debug.xcconfig"; sourceTree = "<group>"; };
 		EA3B248D1CB1A1FC0072B1ED /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		EA5EFC7E1CB0A03300BE6644 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EA5EFC801CB0B9A000BE6644 /* Entertainment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entertainment.swift; sourceTree = "<group>"; };
@@ -63,20 +63,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECE438D3DCD25481BED040A7 /* Pods_WatchMe.framework in Frameworks */,
+				E8D008F1C61AF18B33EF8DAF /* Pods_WatchMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		290A5418CD294D379CA59472 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DCEFC81B72DE7542CA970798 /* Pods-WatchMe.debug.xcconfig */,
+				CB7A7C1CA65931660D4097F0 /* Pods-WatchMe.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		68B680B01CA21318000DC9EF = {
 			isa = PBXGroup;
 			children = (
 				68B680BB1CA21318000DC9EF /* WatchMe */,
 				68B680BA1CA21318000DC9EF /* Products */,
-				EC7E7515331186C2D48123FA /* Pods */,
-				AF9DBC187C6B6110117B7F9C /* Frameworks */,
+				290A5418CD294D379CA59472 /* Pods */,
+				B64841C9E9A7F613CCD42814 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,21 +157,12 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		AF9DBC187C6B6110117B7F9C /* Frameworks */ = {
+		B64841C9E9A7F613CCD42814 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				51530C3D118BCCA3317095C1 /* Pods_WatchMe.framework */,
+				918A11D46F8DF7732AF50D35 /* Pods_WatchMe.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EC7E7515331186C2D48123FA /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2E080AB9FA8E104688C9AAC3 /* Pods-WatchMe.debug.xcconfig */,
-				76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,12 +172,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68B680CB1CA21318000DC9EF /* Build configuration list for PBXNativeTarget "WatchMe" */;
 			buildPhases = (
-				17105543D411FDF9480B7658 /* Check Pods Manifest.lock */,
+				C70E4D6BF2D14439FC61B715 /* [CP] Check Pods Manifest.lock */,
 				68B680B51CA21318000DC9EF /* Sources */,
 				68B680B61CA21318000DC9EF /* Frameworks */,
 				68B680B71CA21318000DC9EF /* Resources */,
-				18E7CB6DF782CBD431F25068 /* Embed Pods Frameworks */,
-				439C0840719C75AD7F36B204 /* Copy Pods Resources */,
+				307B023649C577FE617DD410 /* [CP] Embed Pods Frameworks */,
+				BDE6904436B973923E463D79 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,13 +195,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = Grace;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = mrsata;
 				TargetAttributes = {
 					68B680B81CA21318000DC9EF = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 477CNH7T4Q;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -237,29 +237,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		17105543D411FDF9480B7658 /* Check Pods Manifest.lock */ = {
+		307B023649C577FE617DD410 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		18E7CB6DF782CBD431F25068 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,19 +252,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		439C0840719C75AD7F36B204 /* Copy Pods Resources */ = {
+		BDE6904436B973923E463D79 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WatchMe/Pods-WatchMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C70E4D6BF2D14439FC61B715 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -334,6 +334,7 @@
 		68B680C91CA21318000DC9EF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -344,8 +345,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -367,7 +370,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -378,6 +381,7 @@
 		68B680CA1CA21318000DC9EF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -388,8 +392,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -405,44 +411,47 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		68B680CC1CA21318000DC9EF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E080AB9FA8E104688C9AAC3 /* Pods-WatchMe.debug.xcconfig */;
+			baseConfigurationReference = DCEFC81B72DE7542CA970798 /* Pods-WatchMe.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WatchMe/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mrsata.WatchMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		68B680CD1CA21318000DC9EF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76C19B3E3C34D3AD04586E6F /* Pods-WatchMe.release.xcconfig */;
+			baseConfigurationReference = CB7A7C1CA65931660D4097F0 /* Pods-WatchMe.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WatchMe/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mrsata.WatchMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

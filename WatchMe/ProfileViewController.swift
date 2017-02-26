@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
     
     var numCollection: Int?
     var user: User!
-    var createdAt: NSDate?
+    var createdAt: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,20 +27,20 @@ class ProfileViewController: UIViewController {
         let backgroundImageView = UIImageView(frame: frame)
         backgroundImageView.image = UIImage(named: "BG")
         backgroundImageView.alpha = 0.6
-        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        self.view.insertSubview(backgroundImageView, at: 0)
         
         Client.sharedInstance.getSettings("IodineXXY", success: { (response: NSDictionary) -> () in
             // Time format
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"
-            print(response["user"]!["joined_at"])
+            let user = response["user"] as! NSDictionary
             
-            let createdAtString = response["user"]!["joined_at"] as? String
-            self.createdAt = formatter.dateFromString(createdAtString!)
-            //print(self.createdAt)
+            let createdAtString = user["joined_at"] as? String
+            self.createdAt = formatter.date(from: createdAtString!)
+            print(self.createdAt ?? "no joined_at")
             
-            let calendar = NSCalendar.currentCalendar()
-            let comp = calendar.components([.Hour, .Minute, .Month, .Day, .Year], fromDate: self.createdAt!)
+            let calendar = Calendar.current
+            let comp = (calendar as NSCalendar).components([.hour, .minute, .month, .day, .year], from: self.createdAt!)
             
             self.joinTime.text = "\(comp.month)/\(comp.day)/\(comp.year)"
             
@@ -50,15 +50,15 @@ class ProfileViewController: UIViewController {
         
         Client.sharedInstance.getStats("IodineXXY", success: { (response: NSDictionary) -> () in
             
-            let movNum = response["movies"]!["collected"] as? Int
-            print(movNum)
+            let movies = response["movies"] as! NSDictionary
+            let shows = response["shows"] as! NSDictionary
+            let episodes = response["episodes"] as! NSDictionary
             
-            let showNum = response["shows"]!["collected"] as? Int
+            let movNum = movies["collected"] as! Int
+            let showNum = shows["collected"] as! Int
+            let epiNum = episodes["collected"] as! Int
             
-            let epiNum = response["episodes"]!["collected"] as? Int
-            
-            self.numCollection = (movNum! + showNum! + epiNum!) as Int
-          
+            self.numCollection = (movNum + showNum + epiNum)
             self.numCollected.text = "\(self.numCollection!)"
             }) { (error: NSError) -> () in
            
@@ -69,10 +69,10 @@ class ProfileViewController: UIViewController {
     }
     
     
-    @IBAction func onLogout(sender: AnyObject) {
+    @IBAction func onLogout(_ sender: AnyObject) {
         
         Client.sharedInstance.logout({ () -> () in
-            self.performSegueWithIdentifier("logoutSegue", sender: sender)
+            self.performSegue(withIdentifier: "logoutSegue", sender: sender)
             }) { (error: NSError) -> () in
                 
         }

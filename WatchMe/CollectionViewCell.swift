@@ -20,7 +20,7 @@ class CollectionViewCell: UICollectionViewCell {
 //                let noImageUrl: NSURL = NSURL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
 //                posterImageView.setImageWithURL(noImageUrl)
 //            }
-            posterImageView.setImageWithURL(entertainment.posterImageUrl!)
+            posterImageView.setImageWith(entertainment.posterImageUrl! as URL)
         }
     }
 }

@@ -22,15 +22,15 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource,UIC
         let backgroundImageView = UIImageView(frame: frame)
         backgroundImageView.image = UIImage(named: "BG")
         backgroundImageView.alpha = 0.6
-        self.view.insertSubview(backgroundImageView, atIndex: 0)
+        self.view.insertSubview(backgroundImageView, at: 0)
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.backgroundColor = UIColor.clear
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         Client.sharedInstance.getCollection({ (entertainment: [Entertainment]) -> () in
 
             self.collection = entertainment
@@ -45,7 +45,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource,UIC
         // Dispose of any resources that can be recreated.
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         if(collection != nil)
         {
@@ -54,9 +54,9 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource,UIC
         return 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
         
         cell.entertainment = collection![indexPath.row]            
         
@@ -67,16 +67,16 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource,UIC
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         let cell = sender as! UICollectionViewCell
         
-        let indexPath = collectionView.indexPathForCell(cell)
+        let indexPath = collectionView.indexPath(for: cell)
         let movie = collection[indexPath!.row]
         
-        let detailViewController = segue.destinationViewController as! ItemDetailViewController
+        let detailViewController = segue.destination as! ItemDetailViewController
         
         detailViewController.entertainment = movie
     }

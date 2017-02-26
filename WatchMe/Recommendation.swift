@@ -13,8 +13,9 @@ class Recommendation: NSObject {
     var title: String?
     var year: Int?
     var type: String?
-    var posterImageUrl: NSURL?
+    var posterImageUrl: URL?
     var ids: NSDictionary?
+    let noImageUrl: URL = URL(string: "http://1vyf1h2a37bmf88hy3i8ce9e.wpengine.netdna-cdn.com/wp-content/themes/public/img/noimgavailable.jpg")!
 
     init(dictionary: NSDictionary)
     {
@@ -27,20 +28,20 @@ class Recommendation: NSObject {
         
         ids = dictionary["ids"] as? NSDictionary
         
-        let posterString = dictionary["images"]!["poster"]!!["thumb"] as? String
-        
-        if let posterString = posterString
-        {
-            posterImageUrl = NSURL(string: posterString)
-        }
-        else
-        {
-            posterImageUrl = nil
-        }
+//        let posterString = dictionary["images"]!["poster"]!!["thumb"] as? String
+//        
+//        if let posterString = posterString
+//        {
+//            posterImageUrl = URL(string: posterString)
+//        }
+//        else
+//        {
+            posterImageUrl = noImageUrl
+//        }
         
     }
 
-    class func toArray(array: [NSDictionary]) -> [Recommendation]{
+    class func toArray(_ array: [NSDictionary]) -> [Recommendation]{
         var recommendations = [Recommendation]()
         
         for dictionary in array {
